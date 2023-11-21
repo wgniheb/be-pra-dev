@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EntityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,4 +46,12 @@ Route::group(['middleware' => 'api', 'prefix' => 'users'], function() {
 Route::group(['middleware' => 'api', 'prefix' => 'dashboard'], function(){
     Route::get('count-user', [DashboardController::class, 'countUser']);
     Route::get('count-role', [DashboardController::class, 'countRole']);
+});
+
+Route::group(['middleware' => 'api', 'prefix' => 'entity'], function(){
+    Route::get('/', [EntityController::class, 'index']);
+    Route::post('/', [EntityController::class, 'store']);
+    Route::get('/{id}', [EntityController::class, 'show']);
+    Route::post('update/{id}', [EntityController::class, 'update']);
+    Route::delete('/{id}', [EntityController::class, 'destroy']);
 });
