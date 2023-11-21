@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -18,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::all('id','name', 'email');
+        $user = User::with('role')->get();
         $user = array('data' => $user);
         return response()->json($user);
     }
@@ -31,7 +32,8 @@ class UserController extends Controller
         $validator = Validator::make(request()->all(),[
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required'
+            'password' => 'required',
+            'role_id'=> 'required'
         ]);
 
         if ($validator->fails()) {
@@ -43,6 +45,12 @@ class UserController extends Controller
             'email' => request('email'),
             'password' => Hash::make(request('password')),
         ]);
+
+        $role = new Role;
+        $role->id = $request->get('role_id');
+
+        $user->role()->associate($role);
+        $user->save();
 
         if ($user) {
             return response()->json(['message' => 'Successfully created user!']);
