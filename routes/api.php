@@ -7,6 +7,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EntityController;
+use App\Http\Controllers\IssueCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,4 +55,12 @@ Route::group(['middleware' => 'api', 'prefix' => 'entity'], function(){
     Route::get('/{id}', [EntityController::class, 'show']);
     Route::post('update/{id}', [EntityController::class, 'update']);
     Route::delete('/{id}', [EntityController::class, 'destroy']);
+});
+
+Route::group(['middleware' => 'api', 'prefix' => 'issue-category'], function(){
+    Route::get('/', [IssueCategoryController::class, 'index']);
+    Route::post('/', [IssueCategoryController::class, 'store']);
+    Route::get('/{id}', [IssueCategoryController::class, 'show']);
+    Route::post('update/{id}', [IssueCategoryController::class, 'update']);
+    Route::delete('/{id}', [IssueCategoryController::class, 'destroy']);
 });
