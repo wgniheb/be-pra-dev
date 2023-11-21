@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EntityController;
 use App\Http\Controllers\IssueCategoryController;
+use App\Http\Controllers\IssueMatrixController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,4 +64,12 @@ Route::group(['middleware' => 'api', 'prefix' => 'issue-category'], function(){
     Route::get('/{id}', [IssueCategoryController::class, 'show']);
     Route::post('update/{id}', [IssueCategoryController::class, 'update']);
     Route::delete('/{id}', [IssueCategoryController::class, 'destroy']);
+});
+
+Route::group(['middleware' => 'api', 'prefix' => 'issue-matrix'], function(){
+    Route::get('/', [IssueMatrixController::class, 'index']);
+    Route::post('/', [IssueMatrixController::class, 'store']);
+    Route::get('/{id}', [IssueMatrixController::class, 'show']);
+    Route::post('update/{id}', [IssueMatrixController::class, 'update']);
+    Route::delete('/{id}', [IssueMatrixController::class, 'destroy']);
 });
