@@ -30,7 +30,10 @@ Route::group(['middleware' => 'api', 'prefix' => 'role'], function() {
     Route::get('/', [RoleController::class, 'index']);
     Route::post('/', [RoleController::class, 'store']);
     Route::get('/{id}', [RoleController::class, 'show']);
+    Route::post('update/{id}', [RoleController::class, 'update']);
+    Route::delete('/{id}', [RoleController::class, 'destroy']);
 });
+
 Route::group(['middleware' => 'api', 'prefix' => 'users'], function() {
     Route::get('/', [UserController::class, 'index']);
     Route::get('/{id}', [UserController::class, 'show']);

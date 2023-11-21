@@ -60,16 +60,29 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, int $role)
     {
-        //
+        $validator = Validator::make(request()->all(),[
+            'name' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->messages());
+        }
+
+        Role::where('id', $role)->update([
+            'name' => $request->name,
+        ]);
+
+        return response()->json(['message' => 'Success Update Data!']);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Role $role)
+    public function destroy(int $role)
     {
-        //
+        Role::where('id', $role)->delete();
+        return response()->json(['message' => 'Data Successfully Deleted!']);
     }
 }
