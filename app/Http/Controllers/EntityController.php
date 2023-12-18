@@ -12,9 +12,10 @@ class EntityController extends Controller
     {
         $this->middleware('auth:api');
     }
-
     /**
-     * Display a listing of the resource.
+     * Get the authenticated User.
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
