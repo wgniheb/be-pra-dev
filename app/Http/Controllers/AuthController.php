@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Mail;
 use Throwable;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,34 +18,8 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'forgotPassword']]);
     }
-
-//    public function register()
-//    {
-//        $validator = Validator::make(request()->all(),[
-//            'name' => 'required',
-//            'email' => 'required|email|unique:users',
-//            'password' => 'required'
-//        ]);
-//
-//        if ($validator->fails()) {
-//            return response()->json($validator->messages());
-//        }
-//
-//        $user = User::create([
-//            'name' => request('name'),
-//            'email' => request('email'),
-//            'password' => Hash::make(request('password')),
-//        ]);
-//
-//        if ($user) {
-//            return response()->json(['message' => 'Pendaftaran Berhasil']);
-//        } else {
-//            return response()->json(['message' => 'Pendaftaran Gagal!']);
-//        }
-//
-//    }
 
     /**
      * Get a JWT via given credentials.
@@ -117,5 +92,35 @@ class AuthController extends Controller
         "expires_in" => auth()->factory()->getTTL() * 5],
         );
         return response()->json($data,200);
+    }
+
+    /**
+     * Forgot Password
+     */
+    public function forgotPassword(Request $request){
+        $validator = Validator::make(request()->all(),[
+            'email' => 'required|email',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->messages());
+        }
+
+        $email = request('email');
+        $user = User::where('email', $email)->first();
+        if ($user) {
+            $details = [
+                'title' => 'Your Request to Reset Password',
+                'body' => 'Thank you for requesting to reset your password. Here we send you the One Time Password (OTP) to reset your password. Please use this OTP to reset your password.',
+                'otp' => '645214',
+                'body2' => 'This One Time Password (OTP) will expire in 5 minutes and can only be used once. Please do not share this OTP with anyone. Someone may be trying to hack you.',
+                'body3' => 'If you did not request a password reset, no further action is required.',
+                'notes' => 'This is an automated email, please do not reply!',
+            ];
+            Mail::to('sendyjoan5@gmail.com')->send(new \App\Mail\MyTestMail($details));
+            return response()->json(['message' => 'We have e-mailed your one time password!']);
+        } else {
+            return response()->json(['message' => 'Email not found!'], 203);
+        }
     }
 }
