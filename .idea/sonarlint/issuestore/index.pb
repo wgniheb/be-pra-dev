@@ -1,7 +1,4 @@
 
-:
-
-.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 S
 #app/Http/Controllers/Controller.php,2\e\2ed23e1749f02eb8e561f0a531d07863e7cf9fb9
 C
@@ -24,20 +21,8 @@ W
 'app/Http/Controllers/UserController.php,7\d\7de9f5d267d12a172eff77837bcb8fb2e88564c2
 `
 0app/Http/Controllers/IssueCategoryController.php,e\3\e383bd21ea2e783f47e8ae3999e8323fdefe6424
-J
-app/Models/IssueMatrix.php,b\a\ba0324f2a7f217b5f2600b0fa7eb720cab1ead91
-^
-.app/Http/Controllers/IssueMatrixController.php,b\b\bb86c365b7c7f9f2e58f7792c060eee259919079
 L
 app/Models/IssueCategory.php,5\a\5a85a823475ce2dac0e9552cba43272bd1d09b44
-t
-Ddatabase/migrations/2023_11_21_082750_create_issue_matrixs_table.php,5\4\54e0ca26b1c5d6e2665808c678f86de48e03b17a
->
-routes/api.php,b\3\b337d07ab0e7d54bf5547a0321a43ecafbd73ec1
-Q
-!resources/views/welcome.blade.php,0\c\0c96dd63e07fb2e889aeaea5cbabd89d0d09f1fb
-W
-'app/Http/Controllers/RoleController.php,a\9\a9691171c54b1b968da6a19cb863d8792f0a5c7c
 
 Q.idea/sonarlint/securityhotspotstore/e/d/ed74941bf13872c19601e3eed5c5547e72b479cb,1\a\1acf6b27973f5f9ee692b8e5f984e35424b6fca4
 w
@@ -90,11 +75,3 @@ G.idea/sonarlint/issuestore/c/e/cea6ac18c031be6ef6e67c3024fe49920f1be37d,1\0\10
 -.idea/sonarlint/securityhotspotstore/index.pb,8\8\88a9255124c95bdc913197c120a8d560edc59c8e
 w
 G.idea/sonarlint/issuestore/d/1/d1edecf4b5861a38b64b4958d2d765f192a5774b,f\8\f876577730afafa74e4408dfebb7a58700bcfdc4
-Y
-)app/Http/Controllers/EntityController.php,4\2\42132882abebcbf1435c11806ca4e1ba2b3e84f8
->
-routes/web.php,6\b\6b9a783d9b43fee50fd28f56dbd1856d2608f305
-W
-'app/Http/Controllers/AuthController.php,3\1\31d283052936b2e7a79a7aa05dd75800e2abe438
-l
-<database/migrations/2014_10_12_000000_create_users_table.php,d\e\de963aaada5c6577b654cfbdcf083dc355b1fa2b
