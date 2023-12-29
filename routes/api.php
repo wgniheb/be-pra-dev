@@ -28,6 +28,8 @@ Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('me', [AuthController::class, 'me']);
     Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
+    Route::post('otp-verification', [AuthController::class, 'otpVerification']);
+    Route::post('reset-password', [AuthController::class, 'resetPassword']);
 });
 
 Route::group(['middleware' => 'api', 'prefix' => 'role'], function() {

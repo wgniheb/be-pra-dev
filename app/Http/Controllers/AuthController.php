@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Otp;
 use Illuminate\Support\Facades\Mail;
 use Throwable;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -18,7 +20,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'forgotPassword']]);
+        $this->middleware('auth:api', ['except' => ['login', 'forgotPassword', 'otpVerification', 'resetPassword']]);
     }
 
     /**
@@ -108,19 +110,102 @@ class AuthController extends Controller
 
         $email = request('email');
         $user = User::where('email', $email)->first();
+
+        $otp = random_int(000001, 999999);
+        $req = Carbon::now();
+        $exp = Carbon::now()->addMinutes(5);
+
+        $data = Otp::create([
+            'otp' => $otp,
+            'request_time' => $req,
+            'expired_time' => $exp,
+        ]);
+
+        $data->user()->associate($user);
+        $data->save();
+
         if ($user) {
             $details = [
                 'title' => 'Your Request to Reset Password',
                 'body' => 'Thank you for requesting to reset your password. Here we send you the One Time Password (OTP) to reset your password. Please use this OTP to reset your password.',
-                'otp' => '645214',
+                'otp' => $otp,
                 'body2' => 'This One Time Password (OTP) will expire in 5 minutes and can only be used once. Please do not share this OTP with anyone. Someone may be trying to hack you.',
                 'body3' => 'If you did not request a password reset, no further action is required.',
                 'notes' => 'This is an automated email, please do not reply!',
             ];
             Mail::to('sendyjoan5@gmail.com')->send(new \App\Mail\MyTestMail($details));
-            return response()->json(['message' => 'We have e-mailed your one time password!']);
+            return response()->json(['message' => 'We have e-mailed your one time password!'], 200);
         } else {
             return response()->json(['message' => 'Email not found!'], 203);
         }
+    }
+
+    public function otpVerification(Request $request){
+        $validator = Validator::make(request()->all(),[
+            'otp' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->messages());
+        }
+
+        $otp = request('otp');
+        $data = Otp::with('user')->where('otp', $otp)->first();
+
+        if ($data) {
+            $now = Carbon::now();
+            $exp = $data->expired_time;
+            if ($now > $exp) {
+                $data->delete();
+                return response()->json(['message' => 'OTP Expired!'], 203);
+            } else {
+                return response()->json(['message' => 'OTP Verified!', 'otp' => $otp, 'email' => $data->user->email], 200);
+            }
+        } else {
+            return response()->json(['message' => 'OTP not found!'], 203);
+        }
+    }
+
+    public function resetPassword(Request $request){
+        $validator = Validator::make(request()->all(),[
+            'otp' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+            'confirm_password' => 'required|same:password',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->messages());
+        }
+
+        $otp = request('otp');
+        $email = request('email');
+        $password = request('password');
+        $user = User::where('email', $email)->first();
+
+        $data = Otp::with('user')->where('otp', $otp)->first();
+        if ($data->user->email == $email) {
+            $user->password = Hash::make($password);
+            $user->save();
+            $data->verified_time = Carbon::now();
+            $data->save();
+            $data->delete();
+
+            //clear OTP data with this email
+            $data = Otp::where('user_id', $user->id);
+            $data->delete();
+
+            return response()->json(['message' => 'Password successfully changed!'], 200);
+        } else {
+            return response()->json(['message' => 'Email not found!'], 203);
+        }
+
+//        if ($user) {
+//            $user->password = Hash::make($password);
+//            $user->save();
+//            return response()->json(['message' => 'Password successfully changed!'], 200);
+//        } else {
+//            return response()->json(['message' => 'Email not found!'], 203);
+//        }
     }
 }
