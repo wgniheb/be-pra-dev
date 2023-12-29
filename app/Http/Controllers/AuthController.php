@@ -58,6 +58,15 @@ class AuthController extends Controller
         return response()->json($data,200);
     }
 
+    public function profile(){
+        $data = array("data" => [
+            "name" => auth()->user()->name,
+            "email" => auth()->user()->email,
+            "role" => auth()->user()->role->name,
+        ]);
+        return response()->json($data,200);
+    }
+
     /**
      * Log the user out (Invalidate the token).
      *
@@ -133,7 +142,7 @@ class AuthController extends Controller
                 'body3' => 'If you did not request a password reset, no further action is required.',
                 'notes' => 'This is an automated email, please do not reply!',
             ];
-            Mail::to('sendyjoan5@gmail.com')->send(new \App\Mail\MyTestMail($details));
+            Mail::to($email)->send(new \App\Mail\MyTestMail($details));
             return response()->json(['message' => 'We have e-mailed your one time password!'], 200);
         } else {
             return response()->json(['message' => 'Email not found!'], 203);
@@ -157,12 +166,12 @@ class AuthController extends Controller
             $exp = $data->expired_time;
             if ($now > $exp) {
                 $data->delete();
-                return response()->json(['message' => 'OTP Expired!'], 203);
+                return response()->json(['message' => 'One Time Password Expired!'], 203);
             } else {
                 return response()->json(['message' => 'OTP Verified!', 'otp' => $otp, 'email' => $data->user->email], 200);
             }
         } else {
-            return response()->json(['message' => 'OTP not found!'], 203);
+            return response()->json(['message' => 'One Time Password Not found!'], 203);
         }
     }
 
@@ -184,7 +193,8 @@ class AuthController extends Controller
         $user = User::where('email', $email)->first();
 
         $data = Otp::with('user')->where('otp', $otp)->first();
-        if ($data->user->email == $email) {
+
+        if ($data->user->email == $email && $data->expired_time > Carbon::now()) {
             $user->password = Hash::make($password);
             $user->save();
             $data->verified_time = Carbon::now();
@@ -197,15 +207,8 @@ class AuthController extends Controller
 
             return response()->json(['message' => 'Password successfully changed!'], 200);
         } else {
-            return response()->json(['message' => 'Email not found!'], 203);
+            $data->delete();
+            return response()->json(['message' => 'One Time Password is Expired'], 203);
         }
-
-//        if ($user) {
-//            $user->password = Hash::make($password);
-//            $user->save();
-//            return response()->json(['message' => 'Password successfully changed!'], 200);
-//        } else {
-//            return response()->json(['message' => 'Email not found!'], 203);
-//        }
     }
 }
