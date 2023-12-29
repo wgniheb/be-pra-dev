@@ -5,8 +5,6 @@ v
 Fdatabase/migrations/2023_11_21_062315_add_users_soft_delete_column.php,4\4\4409f4f8fd0f24e9dbc442a69c6ed529128893de
 v
 Fdatabase/migrations/2023_11_21_062839_add_roles_soft_delete_column.php,a\c\ac057b20562bfd3ce0b59ee0172e7aeb811a5e3c
-n
->database/migrations/2023_11_21_071843_create_entites_table.php,d\1\d1edecf4b5861a38b64b4958d2d765f192a5774b
 w
 Gdatabase/migrations/2023_11_21_080846_create_issue_categories_table.php,e\d\ed74941bf13872c19601e3eed5c5547e72b479cb
 `
@@ -40,8 +38,6 @@ G.idea/sonarlint/issuestore/d/1/d1edecf4b5861a38b64b4958d2d765f192a5774b,f\8\f8
 Q
 !resources/views/welcome.blade.php,0\c\0c96dd63e07fb2e889aeaea5cbabd89d0d09f1fb
 W
-'app/Http/Controllers/RoleController.php,a\9\a9691171c54b1b968da6a19cb863d8792f0a5c7c
-W
 'app/Http/Controllers/MailController.php,a\0\a054261827f3878a648c33ed899aaaadaa5abe49
 :
 
@@ -62,8 +58,6 @@ E
 app/Models/Entity.php,b\4\b47ea1eabab441ce6468d4740ae3df11b86cad6b
 J
 app/Models/IssueMatrix.php,b\a\ba0324f2a7f217b5f2600b0fa7eb720cab1ead91
-C
-app/Models/Role.php,c\e\cea6ac18c031be6ef6e67c3024fe49920f1be37d
 i
 9vendor/nesbot/carbon/src/Carbon/PHPStan/AbstractMacro.php,2\7\27e36689d189ff000e72f3ed0be43094b8326082
 h
@@ -106,3 +100,33 @@ h
 composer.json,3\9\3957b91a0d8450cea0115cfd5af69eac90d75897
 =
 composer.lock,c\3\c3262e2a0879195bd6a727e90f768bc85ad79ffd
+T
+$app/Providers/AppServiceProvider.php,4\8\48b8d8112e9bdd32ee7e25b1224d6739eece1e72
+t
+Ddatabase/migrations/2023_11_21_082750_create_issue_matrixs_table.php,5\4\54e0ca26b1c5d6e2665808c678f86de48e03b17a
+W
+'app/Http/Controllers/UserController.php,7\d\7de9f5d267d12a172eff77837bcb8fb2e88564c2
+S
+#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+]
+-.idea/sonarlint/securityhotspotstore/index.pb,8\8\88a9255124c95bdc913197c120a8d560edc59c8e
+Y
+)app/Http/Controllers/EntityController.php,4\2\42132882abebcbf1435c11806ca4e1ba2b3e84f8
+>
+routes/api.php,b\3\b337d07ab0e7d54bf5547a0321a43ecafbd73ec1
+>
+config/app.php,7\3\734f7be25e8008acc7129e73cd116d5de913e6fd
+W
+'app/Http/Controllers/AuthController.php,3\1\31d283052936b2e7a79a7aa05dd75800e2abe438
+C
+app/Models/User.php,a\9\a90f2e50cb06863b54effced365aa5f1fe7d9c88
+E
+config/permission.php,2\9\29f0acc6d9348a48c9acf34985464b316aaff2ba
+C
+app/Models/Role.php,c\e\cea6ac18c031be6ef6e67c3024fe49920f1be37d
+W
+'app/Http/Controllers/RoleController.php,a\9\a9691171c54b1b968da6a19cb863d8792f0a5c7c
+r
+Bdatabase/migrations/2023_12_30_045606_create_permission_tables.php,2\3\2314745b94df448d7a0c0b7a5fd863bd1247b0bd
+n
+>database/migrations/2023_11_21_071843_create_entites_table.php,d\1\d1edecf4b5861a38b64b4958d2d765f192a5774b
