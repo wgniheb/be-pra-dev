@@ -40,11 +40,33 @@ class AuthController extends Controller
         }
 
         $credentials = request(['email', 'password']);
-        // if (! $token = auth()->claims(['email' => $email , 'e' => 'a'])->attempt($credentials)) {
+
         if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['message' => 'Credential not found!'], 202);
+            return response()->json(['message' => 'Credential Not Found!'], 202);
+        } else {
+            $user = User::with('userstatus')->where('email', request('email'))->first();
+            $suspend = $user->userstatus->name == 'Suspended' ? true : false;
+            if ($suspend) {
+                return response()->json(['message' => 'Your account has been suspended!'], 203);
+            }else{
+                return $this->respondWithToken($token);
+            }
         }
-        return $this->respondWithToken($token);
+        // return $this->respondWithToken($token);
+
+
+        // $user = User::with('userstatus')->where('email', request('email'))->first();
+
+        // $suspend = $user->userstatus->name == 'Suspended' ? true : false;
+
+        // if ($suspend) {
+        //     return response()->json(['message' => 'Your account has been suspended!'], 203);
+        // }else{
+        //     if (! $token = auth()->attempt($credentials)) {
+        //         return response()->json(['message' => 'Credential not found!'], 202);
+        //     }
+        //         return $this->respondWithToken($token);
+        // }
     }
 
     /**
