@@ -72,4 +72,14 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Otp::class);
     }
+
+    public function userHasEntity()
+    {
+        return $this->hasMany(UserHasEntity::class);
+    }
+
+    public function userStatus()
+    {
+        return $this->belongsTo(UserStatus::class);
+    }
 }

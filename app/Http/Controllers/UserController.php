@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::with('role')->get();
+        $user = User::with('role', 'userstatus')->get();
         $user = array('data' => $user);
         return response()->json($user);
     }

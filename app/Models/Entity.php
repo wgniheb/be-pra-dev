@@ -14,4 +14,9 @@ class Entity extends Model
         'name',
         'address',
     ];
+
+    public function userHasEntity()
+    {
+        return $this->hasMany(UserHasEntity::class);
+    }
 }
