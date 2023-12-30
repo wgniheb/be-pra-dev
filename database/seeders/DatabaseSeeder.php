@@ -8,6 +8,8 @@ use Database\Seeders\RoleSeeder;
 use Database\Seeders\EntitySeeder;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\UserStatusSeeder;
+use Database\Seeders\IssueMatrixSeeder;
+use Database\Seeders\IssueCategorySeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,5 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(PermissionSeeder::class);
         $this->call(EntitySeeder::class);
+        $this->call(IssueCategorySeeder::class);
+        $this->call(IssueMatrixSeeder::class);
     }
 }
