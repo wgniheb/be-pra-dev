@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Database\Seeders\RoleSeeder;
+use Database\Seeders\UserSeeder;
 use Database\Seeders\EntitySeeder;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\UserStatusSeeder;
@@ -24,5 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->call(EntitySeeder::class);
         $this->call(IssueCategorySeeder::class);
         $this->call(IssueMatrixSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }
