@@ -6,17 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Permission extends Model
+class RoleHasPermission extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'slug',
-        'name',
+        'role_id',
+        'permission_id',
     ];
 
-    public function roleHasPermission()
+    public function role()
     {
-        return $this->hasMany(RoleHasPermission::class);
+        return $this->belongsTo(Role::class);
+    }
+
+    public function permission()
+    {
+        return $this->belongsTo(Permission::class);
     }
 }

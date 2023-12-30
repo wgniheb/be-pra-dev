@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\IssueMatrixController;
 use App\Http\Controllers\IssueCategoryController;
+use App\Http\Controllers\RoleHasPermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,4 +86,12 @@ Route::group(['middleware' => 'api', 'prefix' => 'permission'], function(){
     Route::get('/{id}', [PermissionController::class, 'show']);
     Route::post('update/{id}', [PermissionController::class, 'update']);
     Route::delete('/{id}', [PermissionController::class, 'destroy']);
+});
+
+Route::group(['middleware' => 'api', 'prefix' => 'role-has-permission'], function(){
+    Route::get('/', [RoleHasPermissionController::class, 'index']);
+    Route::post('/', [RoleHasPermissionController::class, 'store']);
+    // Route::get('/{id}', [RoleHasPermissionController::class, 'show']);
+    // Route::post('update/{id}', [RoleHasPermissionController::class, 'update']);
+    // Route::delete('/{id}', [RoleHasPermissionController::class, 'destroy']);
 });
