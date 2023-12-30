@@ -5,10 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EntityController;
-use App\Http\Controllers\IssueCategoryController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\IssueMatrixController;
+use App\Http\Controllers\IssueCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,4 +77,12 @@ Route::group(['middleware' => 'api', 'prefix' => 'issue-matrix'], function(){
     Route::get('/{id}', [IssueMatrixController::class, 'show']);
     Route::post('update/{id}', [IssueMatrixController::class, 'update']);
     Route::delete('/{id}', [IssueMatrixController::class, 'destroy']);
+});
+
+Route::group(['middleware' => 'api', 'prefix' => 'permission'], function(){
+    Route::get('/', [PermissionController::class, 'index']);
+    Route::post('/', [PermissionController::class, 'store']);
+    Route::get('/{id}', [PermissionController::class, 'show']);
+    Route::post('update/{id}', [PermissionController::class, 'update']);
+    Route::delete('/{id}', [PermissionController::class, 'destroy']);
 });
