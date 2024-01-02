@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('otp');
             $table->timestamp('request_time');
-            $table->timestamp('expired_time');
+            $table->timestamp('expired_time')->nullable();
             $table->timestamp('verified_time')->nullable();
             $table->timestamps();
             $table->softDeletes();
