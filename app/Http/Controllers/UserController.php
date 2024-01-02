@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Role;
+use App\Models\User;
+use App\Models\UserStatus;
 use Illuminate\Http\Request;
+use App\Models\UserHasEntity;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -33,7 +35,9 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required',
-            'role_id'=> 'required'
+            'phone_number' => 'numeric|nullable|digits_between:10,13',
+            'role_id'=> 'required',
+            'entity' => 'required|array|min:1'
         ]);
 
         if ($validator->fails()) {
@@ -44,12 +48,27 @@ class UserController extends Controller
             'name' => request('name'),
             'email' => request('email'),
             'password' => Hash::make(request('password')),
+            'phone_number' => request('phone_number'),
+            'userstatus_id' => 1,
+            'role_id' => request('role_id'),
         ]);
+
+        foreach ($request->entity as $entity) {
+            UserHasEntity::create([
+                'user_id' => $user->id,
+                'entity_id' => $entity
+            ]);
+        }
 
         $role = new Role;
         $role->id = $request->get('role_id');
 
+        $status = new UserStatus;
+        $status->id = 1;
+
         $user->role()->associate($role);
+        $user->save();
+        $user->userstatus()->associate($status);
         $user->save();
 
         if ($user) {
@@ -64,8 +83,16 @@ class UserController extends Controller
      */
     public function show(int $user)
     {
-        $detail = User::where('id', $user)->first();
-        return response()->json($detail);
+        $detail = User::with('role', 'userstatus')->where('id', $user)->first();
+        $entity = UserHasEntity::with('entity')->where('user_id', $user)->get();
+
+        return response()->json(['data' => $detail, 'entity' => $entity]);
+
+        // $detail = User::with('role', 'userstatus')->where('id', $user)->first();
+        // $entity = UserHasEntity::with(['entity' => function ($query) {
+        //     $query->withTrashed();}])->where('user_id', $user)->get();
+
+        // return response()->json(['data' => $detail, 'entity' => $entity]);
     }
 
     /**

@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('entities', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('address');
-            $table->softDeletes();
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->bigInteger('phone_number')->after('password')->nullable();
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('entities');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn(['phone_number']);
+        });
     }
 };

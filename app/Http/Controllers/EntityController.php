@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Entity;
 use Illuminate\Http\Request;
+use App\Models\UserHasEntity;
 use Illuminate\Support\Facades\Validator;
 
 class EntityController extends Controller
@@ -90,6 +91,7 @@ class EntityController extends Controller
      */
     public function destroy(int $entity)
     {
+        $deleteUserHasEntity = UserHasEntity::where('entity_id', $entity)->delete();
         $e = Entity::where('id', $entity)->delete();
         if ($e) {
             return response()->json(['message' => 'Successfully Delete Entity!']);
