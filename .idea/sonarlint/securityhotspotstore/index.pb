@@ -5,8 +5,6 @@ v
 Fdatabase/migrations/2023_11_21_062839_add_roles_soft_delete_column.php,a\c\ac057b20562bfd3ce0b59ee0172e7aeb811a5e3c
 S
 #app/Http/Controllers/Controller.php,2\e\2ed23e1749f02eb8e561f0a531d07863e7cf9fb9
-n
->database/migrations/2023_11_21_071843_create_entites_table.php,d\1\d1edecf4b5861a38b64b4958d2d765f192a5774b
 w
 Gdatabase/migrations/2023_11_21_080846_create_issue_categories_table.php,e\d\ed74941bf13872c19601e3eed5c5547e72b479cb
 `
@@ -40,8 +38,6 @@ G.idea/sonarlint/issuestore/d/1/d1edecf4b5861a38b64b4958d2d765f192a5774b,f\8\f8
 Q
 !resources/views/welcome.blade.php,0\c\0c96dd63e07fb2e889aeaea5cbabd89d0d09f1fb
 W
-'app/Http/Controllers/RoleController.php,a\9\a9691171c54b1b968da6a19cb863d8792f0a5c7c
-W
 'app/Http/Controllers/MailController.php,a\0\a054261827f3878a648c33ed899aaaadaa5abe49
 :
 
@@ -52,12 +48,8 @@ l
 <database/migrations/2014_10_12_000000_create_users_table.php,d\e\de963aaada5c6577b654cfbdcf083dc355b1fa2b
 [
 +resources/views/emails/myTestMail.blade.php,b\d\bd91bfd45385b83bb435ae94d0c0562b2728f218
->
-routes/web.php,6\b\6b9a783d9b43fee50fd28f56dbd1856d2608f305
 p
 @database/migrations/2023_11_21_070042_relasi_user_role_table.php,4\b\4b42f69fb4dc3c15d3aa9fe2f9b047cfb14f7b7f
-C
-app/Models/Role.php,c\e\cea6ac18c031be6ef6e67c3024fe49920f1be37d
 J
 app/Models/IssueMatrix.php,b\a\ba0324f2a7f217b5f2600b0fa7eb720cab1ead91
 L
@@ -106,3 +98,21 @@ h
 composer.json,3\9\3957b91a0d8450cea0115cfd5af69eac90d75897
 [
 +vendor/nesbot/carbon/src/Carbon/Lang/sk.php,5\d\5df85198d77bdf3a01b0e57043181e6460a22193
+n
+>database/migrations/2023_11_21_071843_create_entites_table.php,d\1\d1edecf4b5861a38b64b4958d2d765f192a5774b
+C
+app/Models/Role.php,c\e\cea6ac18c031be6ef6e67c3024fe49920f1be37d
+W
+'app/Http/Controllers/AuthController.php,3\1\31d283052936b2e7a79a7aa05dd75800e2abe438
+C
+app/Models/User.php,a\9\a90f2e50cb06863b54effced365aa5f1fe7d9c88
+>
+config/app.php,7\3\734f7be25e8008acc7129e73cd116d5de913e6fd
+>
+routes/web.php,6\b\6b9a783d9b43fee50fd28f56dbd1856d2608f305
+W
+'app/Http/Controllers/RoleController.php,a\9\a9691171c54b1b968da6a19cb863d8792f0a5c7c
+€
+Pdatabase/migrations/2023_12_31_144917_add_phone_number_column_to_users_table.php,f\5\f533c5413e0b83113ce2d93328432f7645070aa3
+d
+4app/Http/Controllers/RoleHasPermissionController.php,a\8\a8445550ffb96edf8c6f0a3d5b77cf4b194d9630
