@@ -41,7 +41,7 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->messages());
+            return response()->json($validator->messages(), 201);
         }
 
         $user = User::create([
@@ -102,7 +102,11 @@ class UserController extends Controller
     {
         $validator = Validator::make(request()->all(),[
             'name' => 'required',
-            'email' => 'required|email'
+            'email' => 'required|email',
+            'phone_number' => 'numeric|nullable|digits_between:10,13',
+            'role_id'=> 'required',
+            'userstatus_id' => 'required',
+            'entity' => 'required|array|min:1'
         ]);
 
         if ($validator->fails()) {
@@ -111,8 +115,20 @@ class UserController extends Controller
 
         User::where('id', $user)->update([
             'name' => $request->name,
-            'email' => $request->email
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'user_status_id' => $request->userstatus_id,
+            'role_id' => $request->role_id
         ]);
+
+        UserHasEntity::where('user_id', $user)->delete();
+
+        foreach ($request->entity as $entity) {
+            UserHasEntity::create([
+                'user_id' => $user,
+                'entity_id' => $entity
+            ]);
+        }
 
         return response()->json(['message' => 'Success Update Data!']);
     }
@@ -123,6 +139,7 @@ class UserController extends Controller
     public function destroy(int $user)
     {
         User::where('id', $user)->delete();
+        UserHasEntity::where('user_id', $user)->delete();
         return response()->json(['message' => 'Data Successfully Deleted!']);
     }
 }

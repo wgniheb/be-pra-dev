@@ -108,11 +108,13 @@ C
 app/Models/User.php,a\9\a90f2e50cb06863b54effced365aa5f1fe7d9c88
 >
 config/app.php,7\3\734f7be25e8008acc7129e73cd116d5de913e6fd
+€
+Pdatabase/migrations/2023_12_31_144917_add_phone_number_column_to_users_table.php,f\5\f533c5413e0b83113ce2d93328432f7645070aa3
 >
 routes/web.php,6\b\6b9a783d9b43fee50fd28f56dbd1856d2608f305
 W
 'app/Http/Controllers/RoleController.php,a\9\a9691171c54b1b968da6a19cb863d8792f0a5c7c
-€
-Pdatabase/migrations/2023_12_31_144917_add_phone_number_column_to_users_table.php,f\5\f533c5413e0b83113ce2d93328432f7645070aa3
 d
 4app/Http/Controllers/RoleHasPermissionController.php,a\8\a8445550ffb96edf8c6f0a3d5b77cf4b194d9630
+W
+'app/Http/Controllers/UserController.php,7\d\7de9f5d267d12a172eff77837bcb8fb2e88564c2
