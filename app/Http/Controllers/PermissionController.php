@@ -40,9 +40,9 @@ class PermissionController extends Controller
         ]);
 
         if ($permission) {
-            return response()->json(['message' => 'Permission Berhasil Ditambahkan']);
+            return response()->json(['message' => 'Permission Successfully Added!']);
         } else {
-            return response()->json(['message' => 'Permission Gagal Ditambahkan']);
+            return response()->json(['message' => 'Permission Failed Added!']);
         }
     }
 
@@ -74,7 +74,7 @@ class PermissionController extends Controller
             'name' => $request->name,
         ]);
 
-        return response()->json(['message' => 'Permission Berhasil Diupdate']);
+        return response()->json(['message' => 'Permission Successfully Updated!']);
     }
 
     /**
@@ -85,9 +85,9 @@ class PermissionController extends Controller
         $permission = Permission::where('id', $permission)->delete();
 
         if ($permission) {
-            return response()->json(['message' => 'Permission Berhasil Dihapus']);
+            return response()->json(['message' => 'Permission Successfully Deleted!']);
         } else {
-            return response()->json(['message' => 'Permission Gagal Dihapus']);
+            return response()->json(['message' => 'Permission Failed Deleted!']);
         }
     }
 }
