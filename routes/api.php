@@ -33,6 +33,7 @@ Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
     Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
     Route::post('otp-verification', [AuthController::class, 'otpVerification']);
     Route::post('reset-password', [AuthController::class, 'resetPassword']);
+    // Route::get('user-permission', [AuthController::class, 'permission']);
 });
 
 Route::group(['middleware' => 'api', 'prefix' => 'role'], function() {

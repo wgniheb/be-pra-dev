@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Otp;
-use Illuminate\Support\Facades\Mail;
 use Throwable;
+use Carbon\Carbon;
+use App\Models\Otp;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\RoleHasPermission;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -41,7 +42,15 @@ class AuthController extends Controller
 
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
+        $user = User::where('email', request('email'))->first();
+
+        $permission = RoleHasPermission::with('permission')->where('role_id', $user->role_id)->get();
+
+        for($i = 0; $i < count($permission); $i++){
+            $permission[$i] = $permission[$i]->permission->slug;
+        }
+
+        if (! $token = auth()->claims(['permission' => $permission])->attempt($credentials)) {
             return response()->json(['message' => 'Credential Not Found!'], 202);
         } else {
             $user = User::with('userstatus')->where('email', request('email'))->first();
@@ -52,21 +61,6 @@ class AuthController extends Controller
                 return $this->respondWithToken($token);
             }
         }
-        // return $this->respondWithToken($token);
-
-
-        // $user = User::with('userstatus')->where('email', request('email'))->first();
-
-        // $suspend = $user->userstatus->name == 'Suspended' ? true : false;
-
-        // if ($suspend) {
-        //     return response()->json(['message' => 'Your account has been suspended!'], 203);
-        // }else{
-        //     if (! $token = auth()->attempt($credentials)) {
-        //         return response()->json(['message' => 'Credential not found!'], 202);
-        //     }
-        //         return $this->respondWithToken($token);
-        // }
     }
 
     /**
@@ -233,4 +227,11 @@ class AuthController extends Controller
             return response()->json(['message' => 'One Time Password is Expired'], 203);
         }
     }
+
+    // public function permission(){
+    //     $user = auth()->user();
+    //     $role = $user->role->id;
+    //     $permission = \App\Models\RoleHasPermission::with('permission')->where('role_id', $role)->get();
+    //     return response()->json(['data' => $permission], 200);
+    // }
 }
