@@ -13,6 +13,7 @@ class Entity extends Model
     protected $fillable = [
         'name',
         'address',
+        'logo',
     ];
 
     public function userHasEntity()

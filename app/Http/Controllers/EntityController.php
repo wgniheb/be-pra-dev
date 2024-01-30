@@ -33,15 +33,21 @@ class EntityController extends Controller
         $validator = Validator::make(request()->all(),[
             'name' => 'required|unique:entities',
             'address' => 'required',
+            'logo' => 'required|image|mimes:jpeg,png,jpg',
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->messages());
         }
 
+        $fileName = 'logo_'.time().'.'.$request->logo->extension();
+        $path = public_path('logos/'.$fileName);
+        file_put_contents($path, $request->logo->getContent());
+
         $entity = Entity::create([
             'name' => request('name'),
             'address' => request('address'),
+            'logo' => env('STORAGE_URL').'logos/'.$fileName,
         ]);
 
         if ($entity) {
@@ -68,16 +74,28 @@ class EntityController extends Controller
         $validator = Validator::make(request()->all(),[
             'name' => 'required',
             'address' => 'required',
+            'logo' => 'image|mimes:jpeg,png,jpg',
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->messages());
         }
 
-        $e = Entity::where('id', $entity)->update([
-            'name' => $request->name,
-            'address' => $request->address
-        ]);
+        if ($request->logo) {
+            $fileName = 'logo_'.time().'.'.$request->logo->extension();
+            $path = public_path('logos/'.$fileName);
+            file_put_contents($path, $request->logo->getContent());
+            $e = Entity::where('id', $entity)->update([
+                'name' => $request->name,
+                'address' => $request->address,
+                'logo' => env('STORAGE_URL').'logos/'.$fileName,
+            ]);
+        } else {
+            $e = Entity::where('id', $entity)->update([
+                'name' => $request->name,
+                'address' => $request->address,
+            ]);
+        }
 
         if ($e) {
             return response()->json(['message' => 'Successfully Update Entity!']);
