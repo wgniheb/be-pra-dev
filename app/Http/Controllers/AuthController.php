@@ -158,7 +158,7 @@ class AuthController extends Controller
                 'body3' => 'If you did not request a password reset, no further action is required.',
                 'notes' => 'This is an automated email, please do not reply!',
             ];
-            Mail::to($email)->send(new \App\Mail\MyTestMail($details));
+            Mail::to($email)->send(new \App\Mail\ForgotPasswordMail($details));
             return response()->json(['message' => 'We have e-mailed your one time password!'], 200);
         } else {
             return response()->json(['message' => 'Email not found!'], 203);
