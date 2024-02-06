@@ -38,7 +38,7 @@ class ProvinceController extends Controller
         ]);
 
         if ($province) {
-            return response()->json(['message' => 'Province Successfully Added!']);
+            return response()->json(['message' => 'Province Successfully Added!'], 201);
         } else {
             return response()->json(['message' => 'Province Failed Added!']);
         }
