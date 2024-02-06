@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EntityController;
+use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\IssueMatrixController;
@@ -95,4 +96,12 @@ Route::group(['middleware' => 'api', 'prefix' => 'role-has-permission'], functio
     // Route::get('/{id}', [RoleHasPermissionController::class, 'show']);
     // Route::post('update/{id}', [RoleHasPermissionController::class, 'update']);
     // Route::delete('/{id}', [RoleHasPermissionController::class, 'destroy']);
+});
+
+Route::group(['middleware' => 'api', 'prefix' => 'provinces'], function(){
+    Route::get('/', [ProvinceController::class, 'index']);
+    Route::post('/', [ProvinceController::class, 'store']);
+    Route::get('/{id}', [ProvinceController::class, 'show']);
+    Route::post('update/{id}', [ProvinceController::class, 'update']);
+    Route::delete('/{id}', [ProvinceController::class, 'destroy']);
 });
