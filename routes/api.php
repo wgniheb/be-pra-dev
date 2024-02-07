@@ -7,6 +7,7 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EntityController;
+use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PermissionController;
@@ -113,4 +114,13 @@ Route::group(['middleware' => 'api', 'prefix' => 'cities'], function(){
     Route::get('/{id}', [CityController::class, 'show']);
     Route::post('update/{id}', [CityController::class, 'update']);
     Route::delete('/{id}', [CityController::class, 'destroy']);
+    Route::get('province/{id}', [CityController::class, 'getCityByProvince']);
+});
+
+Route::group(['middleware' => 'api', 'prefix' => 'districts'], function(){
+    Route::get('/', [DistrictController::class, 'index']);
+    Route::post('/', [DistrictController::class, 'store']);
+    Route::get('/{id}', [DistrictController::class, 'show']);
+    Route::post('update/{id}', [DistrictController::class, 'update']);
+    Route::delete('/{id}', [DistrictController::class, 'destroy']);
 });
