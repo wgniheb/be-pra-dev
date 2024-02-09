@@ -26,5 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(IssueCategorySeeder::class);
         $this->call(IssueMatrixSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(StakeholderCategorySeeder::class);
+        $this->call(RolePermissionSeeder::class);
     }
 }
