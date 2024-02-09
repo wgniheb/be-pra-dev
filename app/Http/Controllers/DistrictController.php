@@ -83,4 +83,10 @@ class DistrictController extends Controller
             return response()->json(['message' => 'District Failed Deleted!']);
         }
     }
+
+    public function getDistrictByCity(int $city)
+    {
+        $district = District::where('city_id', $city)->with('city', 'province')->get();
+        return response()->json($district);
+    }
 }

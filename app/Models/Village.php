@@ -2,15 +2,23 @@
 
 namespace App\Models;
 
+use App\Models\City;
+use App\Models\District;
+use App\Models\Province;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class District extends Model
+class Village extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name', 'city_id', 'province_id'];
+    protected $fillable = ['name', 'district_id', 'city_id', 'province_id'];
+
+    public function district()
+    {
+        return $this->belongsTo(District::class);
+    }
 
     public function city()
     {
@@ -20,10 +28,5 @@ class District extends Model
     public function province()
     {
         return $this->belongsTo(Province::class);
-    }
-
-    public function village()
-    {
-        return $this->hasMany(Village::class);
     }
 }

@@ -79,4 +79,10 @@ class CityController extends Controller
             return response()->json(['message' => 'City Failed Deleted!']);
         }
     }
+
+    public function getCityByProvince(int $province)
+    {
+        $city = City::where('province_id', $province)->get();
+        return response()->json($city);
+    }
 }

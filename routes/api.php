@@ -7,6 +7,7 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EntityController;
+use App\Http\Controllers\VillageController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\DashboardController;
@@ -123,4 +124,13 @@ Route::group(['middleware' => 'api', 'prefix' => 'districts'], function(){
     Route::get('/{id}', [DistrictController::class, 'show']);
     Route::post('update/{id}', [DistrictController::class, 'update']);
     Route::delete('/{id}', [DistrictController::class, 'destroy']);
+    Route::get('city/{id}', [DistrictController::class, 'getDistrictByCity']);
+});
+
+Route::group(['middleware' => 'api', 'prefix' => 'villages'], function(){
+    Route::get('/', [VillageController::class, 'index']);
+    Route::post('/', [VillageController::class, 'store']);
+    Route::get('/{id}', [VillageController::class, 'show']);
+    Route::post('update/{id}', [VillageController::class, 'update']);
+    Route::delete('/{id}', [VillageController::class, 'destroy']);
 });
