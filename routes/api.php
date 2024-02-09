@@ -13,8 +13,10 @@ use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\IssueMatrixController;
+use App\Http\Controllers\StakeholderController;
 use App\Http\Controllers\IssueCategoryController;
 use App\Http\Controllers\RoleHasPermissionController;
+use App\Http\Controllers\StakeholderCategoryController;
 
 /*
 |--------------------------------------------------------------------------
