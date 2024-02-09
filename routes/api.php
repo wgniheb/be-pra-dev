@@ -134,3 +134,19 @@ Route::group(['middleware' => 'api', 'prefix' => 'villages'], function(){
     Route::post('update/{id}', [VillageController::class, 'update']);
     Route::delete('/{id}', [VillageController::class, 'destroy']);
 });
+
+Route::group(['middleware' => 'api', 'prefix' => 'stakeholder-categories'], function(){
+    Route::get('/', [StakeholderCategoryController::class, 'index']);
+    Route::post('/', [StakeholderCategoryController::class, 'store']);
+    Route::get('/{id}', [StakeholderCategoryController::class, 'show']);
+    Route::post('update/{id}', [StakeholderCategoryController::class, 'update']);
+    Route::delete('/{id}', [StakeholderCategoryController::class, 'destroy']);
+});
+
+Route::group(['middleware' => 'api', 'prefix' => 'stakeholders'], function(){
+    Route::get('/', [StakeholderController::class, 'index']);
+    Route::post('/', [StakeholderController::class, 'store']);
+    Route::get('/{id}', [StakeholderController::class, 'show']);
+    Route::post('update/{id}', [StakeholderController::class, 'update']);
+    Route::delete('/{id}', [StakeholderController::class, 'destroy']);
+});
