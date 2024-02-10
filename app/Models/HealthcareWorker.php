@@ -7,19 +7,19 @@ use App\Models\CommunityProfilingDetail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Idm extends Model
+class HealthcareWorker extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['year', 'score', 'idm_status_id'];
+    protected $fillable = [
+        'is_dokter',
+        'is_perawat',
+        'is_mantri',
+        'is_bidan',
+        'is_dukun',
+    ];
 
-    public function idmStatus()
-    {
-        return $this->belongsTo(IdmStatus::class);
-    }
-
-    public function communityProfilingDetails()
-    {
+    public function communityProfilingDetails(){
         return $this->hasMany(CommunityProfilingDetail::class);
     }
 }

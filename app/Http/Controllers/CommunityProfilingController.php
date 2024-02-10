@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Idm;
 use App\Models\Village;
+use App\Models\Demographic;
 use Illuminate\Http\Request;
+use App\Models\HealthcareWorker;
 use App\Models\CommunityProfiling;
 use App\Models\CommunityProfilingDetail;
 use Illuminate\Support\Facades\Validator;
@@ -40,6 +42,14 @@ class CommunityProfilingController extends Controller
             'idm_year' => 'required',
             'idm_score' => 'required',
             'idm_status_id' => 'required|exists:idm_statuses,id',
+            'jumlah_penduduk_laki_laki' => 'required',
+            'jumlah_penduduk_perempuan' => 'required',
+            'luas_desa' => 'required',
+            'is_dokter' => 'required',
+            'is_perawat' => 'required',
+            'is_mantri' => 'required',
+            'is_bidan' => 'required',
+            'is_dukun' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -57,9 +67,29 @@ class CommunityProfilingController extends Controller
             'idm_status_id' => request('idm_status_id'),
         ]);
 
+        $demographic = Demographic::create([
+            'jumlah_penduduk_laki_laki' => request('jumlah_penduduk_laki_laki'),
+            'jumlah_penduduk_perempuan' => request('jumlah_penduduk_perempuan'),
+            $jt = request('jumlah_penduduk_laki_laki') + request('jumlah_penduduk_perempuan'),
+            'jumlah_penduduk_total' => $jt,
+            'luas_desa' => request('luas_desa'),
+            $kp = $jt / request('luas_desa'),
+            'kepadatan_penduduk' => $kp,
+        ]);
+
+        $healthcare = HealthcareWorker::create([
+            'is_dokter' => request('is_dokter'),
+            'is_perawat' => request('is_perawat'),
+            'is_mantri' => request('is_mantri'),
+            'is_bidan' => request('is_bidan'),
+            'is_dukun' => request('is_dukun'),
+        ]);
+
         $detail = CommunityProfilingDetail::create([
             'community_profiling_id' => $communityProfiling->id,
             'idm_id' => $idm->id,
+            'demographic_id' => $demographic->id,
+            'healthcare_worker_id' => $healthcare->id,
         ]);
 
         if ($detail) {

@@ -7,19 +7,19 @@ use App\Models\CommunityProfilingDetail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Idm extends Model
+class Demographic extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['year', 'score', 'idm_status_id'];
+    protected $fillable = [
+        'jumlah_penduduk_laki_laki',
+        'jumlah_penduduk_perempuan',
+        'jumlah_penduduk_total',
+        'luas_desa',
+        'kepadatan_penduduk',
+    ];
 
-    public function idmStatus()
-    {
-        return $this->belongsTo(IdmStatus::class);
-    }
-
-    public function communityProfilingDetails()
-    {
+    public function communityProfilingDetails(){
         return $this->hasMany(CommunityProfilingDetail::class);
     }
 }
