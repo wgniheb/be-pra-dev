@@ -11,11 +11,13 @@ use App\Http\Controllers\VillageController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\IdmStatusController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\IssueMatrixController;
 use App\Http\Controllers\StakeholderController;
 use App\Http\Controllers\IssueCategoryController;
 use App\Http\Controllers\RoleHasPermissionController;
+use App\Http\Controllers\CommunityProfilingController;
 use App\Http\Controllers\StakeholderCategoryController;
 
 /*
@@ -151,4 +153,21 @@ Route::group(['middleware' => 'api', 'prefix' => 'stakeholders'], function(){
     Route::get('/{id}', [StakeholderController::class, 'show']);
     Route::post('update/{id}', [StakeholderController::class, 'update']);
     Route::delete('/{id}', [StakeholderController::class, 'destroy']);
+});
+
+Route::group(['middleware' => 'api', 'prefix' => 'community-profilings'], function(){
+    Route::get('/', [CommunityProfilingController::class, 'index']);
+    Route::post('/', [CommunityProfilingController::class, 'store']);
+    Route::get('/{id}', [CommunityProfilingController::class, 'show']);
+    Route::post('update/{id}', [CommunityProfilingController::class, 'update']);
+    Route::delete('/{id}', [CommunityProfilingController::class, 'destroy']);
+    Route::get('village/{id}', [CommunityProfilingController::class, 'indexByVillage']);
+});
+
+Route::group(['middleware' => 'api', 'prefix' => 'idm-status'], function(){
+    Route::get('/', [IdmStatusController::class, 'index']);
+    // Route::post('/', [IdmStatusController::class, 'store']);
+    // Route::get('/{id}', [IdmStatusController::class, 'show']);
+    // Route::post('update/{id}', [IdmStatusController::class, 'update']);
+    // Route::delete('/{id}', [IdmStatusController::class, 'destroy']);
 });

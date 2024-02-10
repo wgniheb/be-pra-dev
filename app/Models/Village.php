@@ -29,4 +29,9 @@ class Village extends Model
     {
         return $this->belongsTo(Province::class);
     }
+
+    public function communityProfilings()
+    {
+        return $this->hasMany(CommunityProfiling::class);
+    }
 }
