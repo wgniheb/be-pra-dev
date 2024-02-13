@@ -9,6 +9,7 @@ use App\Models\FarmProduct;
 use Illuminate\Http\Request;
 use App\Models\PlantationCrop;
 use App\Models\HealthcareWorker;
+use App\Models\LivestockProduct;
 use App\Models\CommunityProfiling;
 use App\Models\CommunityProfilingDetail;
 use Illuminate\Support\Facades\Validator;
@@ -61,6 +62,9 @@ class CommunityProfilingController extends Controller
             'is_kopi' => 'required',
             'is_kakao' => 'required',
             'is_lada' => 'required',
+            'is_unggas' => 'required',
+            'is_ternak_besar' => 'required',
+            'is_ternak_kecil' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -111,6 +115,12 @@ class CommunityProfilingController extends Controller
             'is_lada' => request('is_lada'),
         ]);
 
+        $livestock = LivestockProduct::create([
+            'is_unggas' => request('is_unggas'),
+            'is_ternak_besar' => request('is_ternak_besar'),
+            'is_ternak_kecil' => request('is_ternak_kecil'),
+        ]);
+
         $detail = CommunityProfilingDetail::create([
             'community_profiling_id' => $communityProfiling->id,
             'idm_id' => $idm->id,
@@ -118,6 +128,7 @@ class CommunityProfilingController extends Controller
             'healthcare_worker_id' => $healthcare->id,
             'farm_product_id' => $farm->id,
             'plantation_crop_id' => $plantation->id,
+            'livestock_product_id' => $livestock->id,
         ]);
 
         if ($detail) {

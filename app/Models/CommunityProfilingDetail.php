@@ -5,7 +5,9 @@ namespace App\Models;
 use App\Models\Idm;
 use App\Models\Demographic;
 use App\Models\FarmProduct;
+use App\Models\PlantationCrop;
 use App\Models\HealthcareWorker;
+use App\Models\LivestockProduct;
 use App\Models\CommunityProfiling;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,7 +23,8 @@ class CommunityProfilingDetail extends Model
         'demographic_id',
         'healthcare_worker_id',
         'farm_product_id',
-        'plantation_crop_id'
+        'plantation_crop_id',
+        'livestock_product_id',
     ];
 
     public function communityProfiling()
@@ -52,5 +55,10 @@ class CommunityProfilingDetail extends Model
     public function plantationCrop()
     {
         return $this->belongsTo(PlantationCrop::class);
+    }
+
+    public function livestockProduct()
+    {
+        return $this->belongsTo(LivestockProduct::class);
     }
 }
