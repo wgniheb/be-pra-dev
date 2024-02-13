@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Idm;
+use App\Models\Income;
 use App\Models\Fishery;
 use App\Models\LandUse;
 use App\Models\Village;
@@ -15,6 +16,7 @@ use App\Models\HealthcareWorker;
 use App\Models\LivestockProduct;
 use App\Models\CommunityProfiling;
 use App\Models\DrinkingWaterSource;
+use App\Models\EconomicInstitution;
 use App\Models\SanitationWaterSource;
 use App\Models\CommunityProfilingDetail;
 use Illuminate\Support\Facades\Validator;
@@ -28,11 +30,16 @@ class CommunityProfilingController extends Controller
 
     public function index()
     {
+        // $village = Village::with('communityProfilings:id,year,village_id')->get();
+        // return response()->json($village);
         $village = Village::with(['communityProfilings' => function ($query) {
-            $query->orderBy('year', 'desc')->first(); // Assuming you want to sort by year in ascending order
+            $query
+            ->orderBy('year', 'desc')
+            ->select('id', 'year', 'village_id')
+            ; // Assuming you want to sort by year in ascending order
         }])
-        ->with('district', 'city', 'province')
-        ->get();
+        ->with('district:id,name', 'city:id,name', 'province:id,name')
+        ->get(['id', 'name', 'district_id', 'city_id', 'province_id']);
         return response()->json($village);
     }
 
@@ -85,6 +92,11 @@ class CommunityProfilingController extends Controller
             'is_lahan_campuran' => 'required',
             'is_pasar' => 'required',
             'is_kios' => 'required',
+            'income' => 'required',
+            'is_bank' => 'required',
+            'is_koperasi' => 'required',
+            'is_credit_union' => 'required',
+            'is_brilink' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -171,6 +183,17 @@ class CommunityProfilingController extends Controller
             'is_kios' => request('is_kios'),
         ]);
 
+        $income = Income::create([
+            'income' => request('income'),
+        ]);
+
+        $economicInstitution = EconomicInstitution::create([
+            'is_bank' => request('is_bank'),
+            'is_koperasi' => request('is_koperasi'),
+            'is_credit_union' => request('is_credit_union'),
+            'is_brilink' => request('is_brilink'),
+        ]);
+
         $detail = CommunityProfilingDetail::create([
             'community_profiling_id' => $communityProfiling->id,
             'idm_id' => $idm->id,
@@ -184,6 +207,8 @@ class CommunityProfilingController extends Controller
             'sanitation_water_source_id' => $sanitation->id,
             'land_use_id' => $land->id,
             'economic_facility_id' => $economicFasility->id,
+            'income_id' => $income->id,
+            'economic_institution_id' => $economicInstitution->id,
         ]);
 
         if ($detail) {

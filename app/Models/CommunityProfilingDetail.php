@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Idm;
+use App\Models\Income;
 use App\Models\Fishery;
 use App\Models\LandUse;
 use App\Models\Demographic;
@@ -13,6 +14,7 @@ use App\Models\HealthcareWorker;
 use App\Models\LivestockProduct;
 use App\Models\CommunityProfiling;
 use App\Models\DrinkingWaterSource;
+use App\Models\EconomicInstitution;
 use App\Models\SanitationWaterSource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -35,6 +37,8 @@ class CommunityProfilingDetail extends Model
         'sanitation_water_source_id',
         'land_use_id',
         'economic_facility_id',
+        'income_id',
+        'economic_institution_id'
     ];
 
     public function communityProfiling()
@@ -95,5 +99,15 @@ class CommunityProfilingDetail extends Model
     public function economicFacility()
     {
         return $this->belongsTo(EconomicFacility::class);
+    }
+
+    public function income()
+    {
+        return $this->belongsTo(Income::class);
+    }
+
+    public function economicInstitution()
+    {
+        return $this->belongsTo(EconomicInstitution::class);
     }
 }
