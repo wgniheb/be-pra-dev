@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Idm;
 use App\Models\Fishery;
+use App\Models\LandUse;
 use App\Models\Village;
 use App\Models\Demographic;
 use App\Models\FarmProduct;
@@ -79,6 +80,8 @@ class CommunityProfilingController extends Controller
             'is_sumur_MCK' => 'required',
             'is_air_hujan_MCK' => 'required',
             'is_pamsimas_MCK' => 'required',
+            'is_lahan_sawit' => 'required',
+            'is_lahan_campuran' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -155,6 +158,11 @@ class CommunityProfilingController extends Controller
             'is_pamsimas' => request('is_pamsimas_MCK'),
         ]);
 
+        $land = LandUse::create([
+            'luas_lahan_sawit' => request('is_lahan_sawit'),
+            'luas_lahan_campuran' => request('is_lahan_campuran'),
+        ]);
+
         $detail = CommunityProfilingDetail::create([
             'community_profiling_id' => $communityProfiling->id,
             'idm_id' => $idm->id,
@@ -166,6 +174,7 @@ class CommunityProfilingController extends Controller
             'fishery_id' => $fishery->id,
             'drinking_water_source_id' => $drinking->id,
             'sanitation_water_source_id' => $sanitation->id,
+            'land_use_id' => $land->id,
         ]);
 
         if ($detail) {

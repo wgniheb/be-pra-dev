@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Idm;
 use App\Models\Fishery;
+use App\Models\LandUse;
 use App\Models\Demographic;
 use App\Models\FarmProduct;
 use App\Models\PlantationCrop;
@@ -31,6 +32,7 @@ class CommunityProfilingDetail extends Model
         'fishery_id',
         'drinking_water_source_id',
         'sanitation_water_source_id',
+        'land_use_id',
     ];
 
     public function communityProfiling()
@@ -81,5 +83,10 @@ class CommunityProfilingDetail extends Model
     public function sanitationWaterSource()
     {
         return $this->belongsTo(SanitationWaterSource::class);
+    }
+
+    public function landUse()
+    {
+        return $this->belongsTo(LandUse::class);
     }
 }
