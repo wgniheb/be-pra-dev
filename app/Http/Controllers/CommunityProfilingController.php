@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Idm;
+use App\Models\Fishery;
 use App\Models\Village;
 use App\Models\Demographic;
 use App\Models\FarmProduct;
@@ -11,6 +12,8 @@ use App\Models\PlantationCrop;
 use App\Models\HealthcareWorker;
 use App\Models\LivestockProduct;
 use App\Models\CommunityProfiling;
+use App\Models\DrinkingWaterSource;
+use App\Models\SanitationWaterSource;
 use App\Models\CommunityProfilingDetail;
 use Illuminate\Support\Facades\Validator;
 
@@ -65,6 +68,17 @@ class CommunityProfilingController extends Controller
             'is_unggas' => 'required',
             'is_ternak_besar' => 'required',
             'is_ternak_kecil' => 'required',
+            'is_perikanan_budidaya' => 'required',
+            'is_perikanan_tangkap' => 'required',
+            'is_sungai' => 'required',
+            'is_sumur' => 'required',
+            'is_air_hujan' => 'required',
+            'is_galon' => 'required',
+            'is_pamsimas' => 'required',
+            'is_sungai_MCK' => 'required',
+            'is_sumur_MCK' => 'required',
+            'is_air_hujan_MCK' => 'required',
+            'is_pamsimas_MCK' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -121,6 +135,26 @@ class CommunityProfilingController extends Controller
             'is_ternak_kecil' => request('is_ternak_kecil'),
         ]);
 
+        $fishery = Fishery::create([
+            'is_perikanan_budidaya' => request('is_perikanan_budidaya'),
+            'is_perikanan_tangkap' => request('is_perikanan_tangkap'),
+        ]);
+
+        $drinking = DrinkingWaterSource::create([
+            'is_sungai' => request('is_sungai'),
+            'is_sumur' => request('is_sumur'),
+            'is_air_hujan' => request('is_air_hujan'),
+            'is_galon' => request('is_galon'),
+            'is_pamsimas' => request('is_pamsimas'),
+        ]);
+
+        $sanitation = SanitationWaterSource::create([
+            'is_sungai' => request('is_sungai_MCK'),
+            'is_sumur' => request('is_sumur_MCK'),
+            'is_air_hujan' => request('is_air_hujan_MCK'),
+            'is_pamsimas' => request('is_pamsimas_MCK'),
+        ]);
+
         $detail = CommunityProfilingDetail::create([
             'community_profiling_id' => $communityProfiling->id,
             'idm_id' => $idm->id,
@@ -129,6 +163,9 @@ class CommunityProfilingController extends Controller
             'farm_product_id' => $farm->id,
             'plantation_crop_id' => $plantation->id,
             'livestock_product_id' => $livestock->id,
+            'fishery_id' => $fishery->id,
+            'drinking_water_source_id' => $drinking->id,
+            'sanitation_water_source_id' => $sanitation->id,
         ]);
 
         if ($detail) {

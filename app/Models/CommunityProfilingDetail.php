@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use App\Models\Idm;
+use App\Models\Fishery;
 use App\Models\Demographic;
 use App\Models\FarmProduct;
 use App\Models\PlantationCrop;
 use App\Models\HealthcareWorker;
 use App\Models\LivestockProduct;
 use App\Models\CommunityProfiling;
+use App\Models\DrinkingWaterSource;
+use App\Models\SanitationWaterSource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,6 +28,9 @@ class CommunityProfilingDetail extends Model
         'farm_product_id',
         'plantation_crop_id',
         'livestock_product_id',
+        'fishery_id',
+        'drinking_water_source_id',
+        'sanitation_water_source_id',
     ];
 
     public function communityProfiling()
@@ -60,5 +66,20 @@ class CommunityProfilingDetail extends Model
     public function livestockProduct()
     {
         return $this->belongsTo(LivestockProduct::class);
+    }
+
+    public function fishery()
+    {
+        return $this->belongsTo(Fishery::class);
+    }
+
+    public function drinkingWaterSource()
+    {
+        return $this->belongsTo(DrinkingWaterSource::class);
+    }
+
+    public function sanitationWaterSource()
+    {
+        return $this->belongsTo(SanitationWaterSource::class);
     }
 }
