@@ -12,6 +12,7 @@ use App\Models\PlantationCrop;
 use App\Models\EconomicFacility;
 use App\Models\HealthcareWorker;
 use App\Models\LivestockProduct;
+use App\Models\PrimaryLivelihood;
 use App\Models\CommunityProfiling;
 use App\Models\DrinkingWaterSource;
 use App\Models\EconomicInstitution;
@@ -38,7 +39,8 @@ class CommunityProfilingDetail extends Model
         'land_use_id',
         'economic_facility_id',
         'income_id',
-        'economic_institution_id'
+        'economic_institution_id',
+        'primary_livelihood_id',
     ];
 
     public function communityProfiling()
@@ -109,5 +111,10 @@ class CommunityProfilingDetail extends Model
     public function economicInstitution()
     {
         return $this->belongsTo(EconomicInstitution::class);
+    }
+
+    public function primaryLivelihood()
+    {
+        return $this->belongsTo(PrimaryLivelihood::class);
     }
 }

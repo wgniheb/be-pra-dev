@@ -11,9 +11,11 @@ use App\Models\Demographic;
 use App\Models\FarmProduct;
 use Illuminate\Http\Request;
 use App\Models\PlantationCrop;
+use App\Models\PrimaryLivehood;
 use App\Models\EconomicFacility;
 use App\Models\HealthcareWorker;
 use App\Models\LivestockProduct;
+use App\Models\PrimaryLivelihood;
 use App\Models\CommunityProfiling;
 use App\Models\DrinkingWaterSource;
 use App\Models\EconomicInstitution;
@@ -97,6 +99,13 @@ class CommunityProfilingController extends Controller
             'is_koperasi' => 'required',
             'is_credit_union' => 'required',
             'is_brilink' => 'required',
+            'is_petani' => 'required',
+            'is_pekebun' => 'required',
+            'is_pns' => 'required',
+            'is_karyawan_swasta' => 'required',
+            'is_wirausaha' => 'required',
+            'is_nelayan' => 'required',
+            'is_jasa' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -194,6 +203,16 @@ class CommunityProfilingController extends Controller
             'is_brilink' => request('is_brilink'),
         ]);
 
+        $primaryLivehood = PrimaryLivelihood::create([
+            'is_petani' => request('is_petani'),
+            'is_pekebun' => request('is_pekebun'),
+            'is_pns' => request('is_pns'),
+            'is_karyawan_swasta' => request('is_karyawan_swasta'),
+            'is_wirausaha' => request('is_wirausaha'), // 'is_jasa' => request('is_jasa'), // 'is_nelayan' => request('is_nelayan'),
+            'is_nelayan' => request('is_nelayan'),
+            'is_jasa' => request('is_jasa'),
+        ]);
+
         $detail = CommunityProfilingDetail::create([
             'community_profiling_id' => $communityProfiling->id,
             'idm_id' => $idm->id,
@@ -209,6 +228,7 @@ class CommunityProfilingController extends Controller
             'economic_facility_id' => $economicFasility->id,
             'income_id' => $income->id,
             'economic_institution_id' => $economicInstitution->id,
+            'primary_livelihood_id' => $primaryLivehood->id,
         ]);
 
         if ($detail) {
