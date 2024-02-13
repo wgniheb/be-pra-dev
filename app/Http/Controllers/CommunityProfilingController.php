@@ -10,6 +10,7 @@ use App\Models\Demographic;
 use App\Models\FarmProduct;
 use Illuminate\Http\Request;
 use App\Models\PlantationCrop;
+use App\Models\EconomicFacility;
 use App\Models\HealthcareWorker;
 use App\Models\LivestockProduct;
 use App\Models\CommunityProfiling;
@@ -82,6 +83,8 @@ class CommunityProfilingController extends Controller
             'is_pamsimas_MCK' => 'required',
             'is_lahan_sawit' => 'required',
             'is_lahan_campuran' => 'required',
+            'is_pasar' => 'required',
+            'is_kios' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -163,6 +166,11 @@ class CommunityProfilingController extends Controller
             'luas_lahan_campuran' => request('is_lahan_campuran'),
         ]);
 
+        $economicFasility = EconomicFacility::create([
+            'is_pasar' => request('is_pasar'),
+            'is_kios' => request('is_kios'),
+        ]);
+
         $detail = CommunityProfilingDetail::create([
             'community_profiling_id' => $communityProfiling->id,
             'idm_id' => $idm->id,
@@ -175,6 +183,7 @@ class CommunityProfilingController extends Controller
             'drinking_water_source_id' => $drinking->id,
             'sanitation_water_source_id' => $sanitation->id,
             'land_use_id' => $land->id,
+            'economic_facility_id' => $economicFasility->id,
         ]);
 
         if ($detail) {

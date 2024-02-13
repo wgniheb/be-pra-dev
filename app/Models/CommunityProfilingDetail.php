@@ -8,6 +8,7 @@ use App\Models\LandUse;
 use App\Models\Demographic;
 use App\Models\FarmProduct;
 use App\Models\PlantationCrop;
+use App\Models\EconomicFacility;
 use App\Models\HealthcareWorker;
 use App\Models\LivestockProduct;
 use App\Models\CommunityProfiling;
@@ -33,6 +34,7 @@ class CommunityProfilingDetail extends Model
         'drinking_water_source_id',
         'sanitation_water_source_id',
         'land_use_id',
+        'economic_facility_id',
     ];
 
     public function communityProfiling()
@@ -88,5 +90,10 @@ class CommunityProfilingDetail extends Model
     public function landUse()
     {
         return $this->belongsTo(LandUse::class);
+    }
+
+    public function economicFacility()
+    {
+        return $this->belongsTo(EconomicFacility::class);
     }
 }
