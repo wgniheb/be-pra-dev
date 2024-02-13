@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Idm;
 use App\Models\Village;
 use App\Models\Demographic;
+use App\Models\FarmProduct;
 use Illuminate\Http\Request;
+use App\Models\PlantationCrop;
 use App\Models\HealthcareWorker;
 use App\Models\CommunityProfiling;
 use App\Models\CommunityProfilingDetail;
@@ -50,6 +52,15 @@ class CommunityProfilingController extends Controller
             'is_mantri' => 'required',
             'is_bidan' => 'required',
             'is_dukun' => 'required',
+            'is_padi' => 'required',
+            'is_palawija' => 'required',
+            'is_holtikultura' => 'required',
+            'is_sawit' => 'required',
+            'is_karet' => 'required',
+            'is_kelapa' => 'required',
+            'is_kopi' => 'required',
+            'is_kakao' => 'required',
+            'is_lada' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -85,11 +96,28 @@ class CommunityProfilingController extends Controller
             'is_dukun' => request('is_dukun'),
         ]);
 
+        $farm = FarmProduct::create([
+            'is_padi' => request('is_padi'),
+            'is_palawija' => request('is_palawija'),
+            'is_holtikultura' => request('is_holtikultura'),
+        ]);
+
+        $plantation = PlantationCrop::create([
+            'is_sawit' => request('is_sawit'),
+            'is_karet' => request('is_karet'),
+            'is_kelapa' => request('is_kelapa'),
+            'is_kopi' => request('is_kopi'),
+            'is_kakao' => request('is_kakao'),
+            'is_lada' => request('is_lada'),
+        ]);
+
         $detail = CommunityProfilingDetail::create([
             'community_profiling_id' => $communityProfiling->id,
             'idm_id' => $idm->id,
             'demographic_id' => $demographic->id,
             'healthcare_worker_id' => $healthcare->id,
+            'farm_product_id' => $farm->id,
+            'plantation_crop_id' => $plantation->id,
         ]);
 
         if ($detail) {
