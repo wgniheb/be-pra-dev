@@ -10,6 +10,7 @@ use App\Models\LandUse;
 use App\Models\Village;
 use App\Models\Religion;
 use App\Models\Demographic;
+use App\Models\Electricity;
 use App\Models\FarmProduct;
 use Illuminate\Http\Request;
 use App\Models\RoadCondition;
@@ -149,6 +150,8 @@ class CommunityProfilingController extends Controller
             'is_perahu' => 'required',
             'is_becak' => 'required',
             'is_kereta_api' => 'required',
+            'is_pln' => 'required',
+            'is_non_pln' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -311,6 +314,11 @@ class CommunityProfilingController extends Controller
             'is_kereta_api' => request('is_kereta_api'),
         ]);
 
+        $electricity = Electricity::create([
+            'is_pln' => request('is_pln'),
+            'is_non_pln' => request('is_non_pln'),
+        ]);
+
         $detail = CommunityProfilingDetail::create([
             'community_profiling_id' => $communityProfiling->id,
             'idm_id' => $idm->id,
@@ -333,6 +341,7 @@ class CommunityProfilingController extends Controller
             'group_id' => $group->id,
             'road_condition_id' => $road->id,
             'mean_of_transportation_id' => $transportation->id,
+            'electricity_id' => $electricity->id,
         ]);
 
         if ($detail) {

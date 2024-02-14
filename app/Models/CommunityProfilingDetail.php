@@ -9,6 +9,7 @@ use App\Models\Fishery;
 use App\Models\LandUse;
 use App\Models\Religion;
 use App\Models\Demographic;
+use App\Models\Electricity;
 use App\Models\FarmProduct;
 use App\Models\RoadCondition;
 use App\Models\PlantationCrop;
@@ -53,6 +54,7 @@ class CommunityProfilingDetail extends Model
         'group_id',
         'road_condition_id',
         'mean_of_transportation_id',
+        'electricity_id',
     ];
 
     public function communityProfiling()
@@ -158,5 +160,10 @@ class CommunityProfilingDetail extends Model
     public function meanOfTransportation()
     {
         return $this->belongsTo(MeanOfTransportation::class);
+    }
+
+    public function electricity()
+    {
+        return $this->belongsTo(Electricity::class);
     }
 }
