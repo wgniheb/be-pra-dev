@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Idm;
+use App\Models\Group;
 use App\Models\Income;
 use App\Models\Fishery;
 use App\Models\LandUse;
@@ -47,6 +48,7 @@ class CommunityProfilingDetail extends Model
         'secondary_livelihood_id',
         'transmigration_id',
         'religion_id',
+        'group_id',
     ];
 
     public function communityProfiling()
@@ -137,5 +139,10 @@ class CommunityProfilingDetail extends Model
     public function religion()
     {
         return $this->belongsTo(Religion::class);
+    }
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
     }
 }

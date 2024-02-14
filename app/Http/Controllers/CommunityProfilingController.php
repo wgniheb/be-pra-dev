@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Idm;
+use App\Models\Group;
 use App\Models\Income;
 use App\Models\Fishery;
 use App\Models\LandUse;
@@ -50,7 +51,7 @@ class CommunityProfilingController extends Controller
 
     public function indexByVillage(int $village)
     {
-        $communityProfiling = CommunityProfiling::where('village_id', $village)->orderByDesc('year')->get();
+        $communityProfiling = CommunityProfiling::where('village_id', $village)->orderByDesc('year')->get(['id', 'year', 'village_id']);
         return response()->json($communityProfiling);
     }
 
@@ -123,6 +124,18 @@ class CommunityProfilingController extends Controller
             'is_budha' => 'required',
             'is_konghucu' => 'required',
             'is_kaharingan' => 'required',
+            'is_melayu' => 'required',
+            'is_jawa' => 'required',
+            'is_banjar' => 'required',
+            'is_batak' => 'required',
+            'is_minang' => 'required',
+            'is_dayak' => 'required',
+            'is_flores' => 'required',
+            'is_bugis' => 'required',
+            'is_papua' => 'required',
+            'is_manado' => 'required',
+            'is_toraja' => 'required',
+            'is_timor' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -253,6 +266,21 @@ class CommunityProfilingController extends Controller
             'is_kaharingan' => request('is_kaharingan'),
         ]);
 
+        $group = Group::create([
+            'is_melayu' => request('is_melayu'),
+            'is_jawa' => request('is_jawa'),
+            'is_banjar' => request('is_banjar'),
+            'is_batak' => request('is_batak'),
+            'is_minang' => request('is_minang'),
+            'is_dayak' => request('is_dayak'),
+            'is_flores' => request('is_flores'),
+            'is_bugis' => request('is_bugis'),
+            'is_papua' => request('is_papua'),
+            'is_manado' => request('is_manado'),
+            'is_toraja' => request('is_toraja'),
+            'is_timor' => request('is_timor'),
+        ]);
+
         $detail = CommunityProfilingDetail::create([
             'community_profiling_id' => $communityProfiling->id,
             'idm_id' => $idm->id,
@@ -272,6 +300,7 @@ class CommunityProfilingController extends Controller
             'secondary_livelihood_id' => $secondaryLivelihood->id,
             'transmigration_id' => $transmigration->id,
             'religion_id' => $religion->id,
+            'group_id' => $group->id,
         ]);
 
         if ($detail) {
