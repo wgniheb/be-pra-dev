@@ -24,6 +24,7 @@ use App\Models\CommunityProfiling;
 use App\Models\DrinkingWaterSource;
 use App\Models\EconomicInstitution;
 use App\Models\SecondaryLivelihood;
+use App\Models\MeanOfTransportation;
 use App\Models\SanitationWaterSource;
 use App\Models\CommunityProfilingDetail;
 use Illuminate\Support\Facades\Validator;
@@ -141,6 +142,13 @@ class CommunityProfilingController extends Controller
             'is_cor' => 'required',
             'is_tanah' => 'required',
             'is_batu' => 'required',
+            'is_bus' => 'required',
+            'is_angkot' => 'required',
+            'is_sepeda_motor' => 'required',
+            'is_mobil' => 'required',
+            'is_perahu' => 'required',
+            'is_becak' => 'required',
+            'is_kereta_api' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -293,6 +301,16 @@ class CommunityProfilingController extends Controller
             'is_batu' => request('is_batu'),
         ]);
 
+        $transportation = MeanOfTransportation::create([
+            'is_bus' => request('is_bus'),
+            'is_angkot' => request('is_angkot'),
+            'is_sepeda_motor' => request('is_sepeda_motor'),
+            'is_mobil' => request('is_mobil'),
+            'is_perahu' => request('is_perahu'),
+            'is_becak' => request('is_becak'),
+            'is_kereta_api' => request('is_kereta_api'),
+        ]);
+
         $detail = CommunityProfilingDetail::create([
             'community_profiling_id' => $communityProfiling->id,
             'idm_id' => $idm->id,
@@ -314,6 +332,7 @@ class CommunityProfilingController extends Controller
             'religion_id' => $religion->id,
             'group_id' => $group->id,
             'road_condition_id' => $road->id,
+            'mean_of_transportation_id' => $transportation->id,
         ]);
 
         if ($detail) {

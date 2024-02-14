@@ -21,6 +21,7 @@ use App\Models\CommunityProfiling;
 use App\Models\DrinkingWaterSource;
 use App\Models\EconomicInstitution;
 use App\Models\SecondaryLivelihood;
+use App\Models\MeanOfTransportation;
 use App\Models\SanitationWaterSource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -51,6 +52,7 @@ class CommunityProfilingDetail extends Model
         'religion_id',
         'group_id',
         'road_condition_id',
+        'mean_of_transportation_id',
     ];
 
     public function communityProfiling()
@@ -151,5 +153,10 @@ class CommunityProfilingDetail extends Model
     public function roadCondition()
     {
         return $this->belongsTo(RoadCondition::class);
+    }
+
+    public function meanOfTransportation()
+    {
+        return $this->belongsTo(MeanOfTransportation::class);
     }
 }
