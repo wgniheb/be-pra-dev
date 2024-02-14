@@ -6,6 +6,7 @@ use App\Models\Idm;
 use App\Models\Income;
 use App\Models\Fishery;
 use App\Models\LandUse;
+use App\Models\Religion;
 use App\Models\Demographic;
 use App\Models\FarmProduct;
 use App\Models\PlantationCrop;
@@ -45,6 +46,7 @@ class CommunityProfilingDetail extends Model
         'primary_livelihood_id',
         'secondary_livelihood_id',
         'transmigration_id',
+        'religion_id',
     ];
 
     public function communityProfiling()
@@ -130,5 +132,10 @@ class CommunityProfilingDetail extends Model
     public function transmigration()
     {
         return $this->belongsTo(Transmigration::class);
+    }
+
+    public function religion()
+    {
+        return $this->belongsTo(Religion::class);
     }
 }

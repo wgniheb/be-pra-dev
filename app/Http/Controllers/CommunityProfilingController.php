@@ -7,6 +7,7 @@ use App\Models\Income;
 use App\Models\Fishery;
 use App\Models\LandUse;
 use App\Models\Village;
+use App\Models\Religion;
 use App\Models\Demographic;
 use App\Models\FarmProduct;
 use Illuminate\Http\Request;
@@ -115,6 +116,13 @@ class CommunityProfilingController extends Controller
             'is_nelayan_secondary' => 'required',
             'is_lokal' => 'required',
             'is_transmigrasi' => 'required',
+            'is_islam' => 'required',
+            'is_kristen' => 'required',
+            'is_katolik' => 'required',
+            'is_hindu' => 'required',
+            'is_budha' => 'required',
+            'is_konghucu' => 'required',
+            'is_kaharingan' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -235,6 +243,16 @@ class CommunityProfilingController extends Controller
             'is_transmigrasi' => request('is_transmigrasi'),
         ]);
 
+        $religion = Religion::create([
+            'is_islam' => request('is_islam'),
+            'is_kristen' => request('is_kristen'),
+            'is_katolik' => request('is_katolik'),
+            'is_hindu' => request('is_hindu'),
+            'is_budha' => request('is_budha'),
+            'is_konghucu' => request('is_konghucu'),
+            'is_kaharingan' => request('is_kaharingan'),
+        ]);
+
         $detail = CommunityProfilingDetail::create([
             'community_profiling_id' => $communityProfiling->id,
             'idm_id' => $idm->id,
@@ -253,6 +271,7 @@ class CommunityProfilingController extends Controller
             'primary_livelihood_id' => $primaryLivehood->id,
             'secondary_livelihood_id' => $secondaryLivelihood->id,
             'transmigration_id' => $transmigration->id,
+            'religion_id' => $religion->id,
         ]);
 
         if ($detail) {
