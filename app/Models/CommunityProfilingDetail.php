@@ -9,6 +9,7 @@ use App\Models\LandUse;
 use App\Models\Demographic;
 use App\Models\FarmProduct;
 use App\Models\PlantationCrop;
+use App\Models\Transmigration;
 use App\Models\EconomicFacility;
 use App\Models\HealthcareWorker;
 use App\Models\LivestockProduct;
@@ -43,6 +44,7 @@ class CommunityProfilingDetail extends Model
         'economic_institution_id',
         'primary_livelihood_id',
         'secondary_livelihood_id',
+        'transmigration_id',
     ];
 
     public function communityProfiling()
@@ -123,5 +125,10 @@ class CommunityProfilingDetail extends Model
     public function secondaryLivelihood()
     {
         return $this->belongsTo(SecondaryLivelihood::class);
+    }
+
+    public function transmigration()
+    {
+        return $this->belongsTo(Transmigration::class);
     }
 }

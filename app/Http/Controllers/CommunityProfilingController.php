@@ -11,6 +11,7 @@ use App\Models\Demographic;
 use App\Models\FarmProduct;
 use Illuminate\Http\Request;
 use App\Models\PlantationCrop;
+use App\Models\Transmigration;
 use App\Models\PrimaryLivehood;
 use App\Models\EconomicFacility;
 use App\Models\HealthcareWorker;
@@ -112,6 +113,8 @@ class CommunityProfilingController extends Controller
             'is_wirausaha_secondary' => 'required',
             'is_penggarap_lahan_secondary' => 'required',
             'is_nelayan_secondary' => 'required',
+            'is_lokal' => 'required',
+            'is_transmigrasi' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -227,6 +230,11 @@ class CommunityProfilingController extends Controller
             'is_nelayan' => request('is_nelayan_secondary'),
         ]);
 
+        $transmigration = Transmigration::create([
+            'is_lokal' => request('is_lokal'),
+            'is_transmigrasi' => request('is_transmigrasi'),
+        ]);
+
         $detail = CommunityProfilingDetail::create([
             'community_profiling_id' => $communityProfiling->id,
             'idm_id' => $idm->id,
@@ -244,6 +252,7 @@ class CommunityProfilingController extends Controller
             'economic_institution_id' => $economicInstitution->id,
             'primary_livelihood_id' => $primaryLivehood->id,
             'secondary_livelihood_id' => $secondaryLivelihood->id,
+            'transmigration_id' => $transmigration->id,
         ]);
 
         if ($detail) {
