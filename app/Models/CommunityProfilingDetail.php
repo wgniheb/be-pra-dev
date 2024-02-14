@@ -11,6 +11,7 @@ use App\Models\Religion;
 use App\Models\Demographic;
 use App\Models\Electricity;
 use App\Models\FarmProduct;
+use App\Models\Communication;
 use App\Models\RoadCondition;
 use App\Models\PlantationCrop;
 use App\Models\Transmigration;
@@ -55,6 +56,7 @@ class CommunityProfilingDetail extends Model
         'road_condition_id',
         'mean_of_transportation_id',
         'electricity_id',
+        'communication_id',
     ];
 
     public function communityProfiling()
@@ -165,5 +167,10 @@ class CommunityProfilingDetail extends Model
     public function electricity()
     {
         return $this->belongsTo(Electricity::class);
+    }
+
+    public function communication()
+    {
+        return $this->belongsTo(Communication::class);
     }
 }

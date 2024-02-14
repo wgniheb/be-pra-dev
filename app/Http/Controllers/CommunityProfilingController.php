@@ -13,6 +13,7 @@ use App\Models\Demographic;
 use App\Models\Electricity;
 use App\Models\FarmProduct;
 use Illuminate\Http\Request;
+use App\Models\Communication;
 use App\Models\RoadCondition;
 use App\Models\PlantationCrop;
 use App\Models\Transmigration;
@@ -152,6 +153,9 @@ class CommunityProfilingController extends Controller
             'is_kereta_api' => 'required',
             'is_pln' => 'required',
             'is_non_pln' => 'required',
+            'is_surat' => 'required',
+            'is_telephone' => 'required',
+            'is_handphone' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -319,6 +323,12 @@ class CommunityProfilingController extends Controller
             'is_non_pln' => request('is_non_pln'),
         ]);
 
+        $communication = Communication::create([
+            'is_surat' => request('is_surat'),
+            'is_telephone' => request('is_telephone'),
+            'is_handphone' => request('is_handphone'),
+        ]);
+
         $detail = CommunityProfilingDetail::create([
             'community_profiling_id' => $communityProfiling->id,
             'idm_id' => $idm->id,
@@ -342,6 +352,7 @@ class CommunityProfilingController extends Controller
             'road_condition_id' => $road->id,
             'mean_of_transportation_id' => $transportation->id,
             'electricity_id' => $electricity->id,
+            'communication_id' => $communication->id,
         ]);
 
         if ($detail) {
