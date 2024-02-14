@@ -25,6 +25,7 @@ use App\Models\PrimaryLivelihood;
 use App\Models\CommunityProfiling;
 use App\Models\DrinkingWaterSource;
 use App\Models\EconomicInstitution;
+use App\Models\EducationalFacility;
 use App\Models\SecondaryLivelihood;
 use App\Models\MeanOfTransportation;
 use App\Models\SanitationWaterSource;
@@ -156,6 +157,12 @@ class CommunityProfilingController extends Controller
             'is_surat' => 'required',
             'is_telephone' => 'required',
             'is_handphone' => 'required',
+            'is_paud' => 'required',
+            'is_tk' => 'required',
+            'is_sd' => 'required',
+            'is_smp' => 'required',
+            'is_sma' => 'required',
+            'is_pt' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -329,6 +336,15 @@ class CommunityProfilingController extends Controller
             'is_handphone' => request('is_handphone'),
         ]);
 
+        $educational = EducationalFacility::create([
+            'is_paud' => request('is_paud'),
+            'is_tk' => request('is_tk'),
+            'is_sd' => request('is_sd'),
+            'is_smp' => request('is_smp'),
+            'is_sma' => request('is_sma'),
+            'is_pt' => request('is_pt'),
+        ]);
+
         $detail = CommunityProfilingDetail::create([
             'community_profiling_id' => $communityProfiling->id,
             'idm_id' => $idm->id,
@@ -353,6 +369,7 @@ class CommunityProfilingController extends Controller
             'mean_of_transportation_id' => $transportation->id,
             'electricity_id' => $electricity->id,
             'communication_id' => $communication->id,
+            'educational_facility_id' => $educational->id,
         ]);
 
         if ($detail) {

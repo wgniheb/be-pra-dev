@@ -22,6 +22,7 @@ use App\Models\PrimaryLivelihood;
 use App\Models\CommunityProfiling;
 use App\Models\DrinkingWaterSource;
 use App\Models\EconomicInstitution;
+use App\Models\EducationalFacility;
 use App\Models\SecondaryLivelihood;
 use App\Models\MeanOfTransportation;
 use App\Models\SanitationWaterSource;
@@ -57,6 +58,7 @@ class CommunityProfilingDetail extends Model
         'mean_of_transportation_id',
         'electricity_id',
         'communication_id',
+        'educational_facility_id',
     ];
 
     public function communityProfiling()
@@ -172,5 +174,10 @@ class CommunityProfilingDetail extends Model
     public function communication()
     {
         return $this->belongsTo(Communication::class);
+    }
+
+    public function educationalFacility()
+    {
+        return $this->belongsTo(EducationalFacility::class);
     }
 }
