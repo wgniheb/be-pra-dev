@@ -16,6 +16,7 @@ use App\Models\PrimaryLivelihood;
 use App\Models\CommunityProfiling;
 use App\Models\DrinkingWaterSource;
 use App\Models\EconomicInstitution;
+use App\Models\SecondaryLivelihood;
 use App\Models\SanitationWaterSource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -41,6 +42,7 @@ class CommunityProfilingDetail extends Model
         'income_id',
         'economic_institution_id',
         'primary_livelihood_id',
+        'secondary_livelihood_id',
     ];
 
     public function communityProfiling()
@@ -116,5 +118,10 @@ class CommunityProfilingDetail extends Model
     public function primaryLivelihood()
     {
         return $this->belongsTo(PrimaryLivelihood::class);
+    }
+
+    public function secondaryLivelihood()
+    {
+        return $this->belongsTo(SecondaryLivelihood::class);
     }
 }

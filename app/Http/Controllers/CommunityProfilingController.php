@@ -19,6 +19,7 @@ use App\Models\PrimaryLivelihood;
 use App\Models\CommunityProfiling;
 use App\Models\DrinkingWaterSource;
 use App\Models\EconomicInstitution;
+use App\Models\SecondaryLivelihood;
 use App\Models\SanitationWaterSource;
 use App\Models\CommunityProfilingDetail;
 use Illuminate\Support\Facades\Validator;
@@ -106,6 +107,11 @@ class CommunityProfilingController extends Controller
             'is_wirausaha' => 'required',
             'is_nelayan' => 'required',
             'is_jasa' => 'required',
+            'is_karyawan_swasta_secondary' => 'required',
+            'is_pns_secondary' => 'required',
+            'is_wirausaha_secondary' => 'required',
+            'is_penggarap_lahan_secondary' => 'required',
+            'is_nelayan_secondary' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -213,6 +219,14 @@ class CommunityProfilingController extends Controller
             'is_jasa' => request('is_jasa'),
         ]);
 
+        $secondaryLivelihood = SecondaryLivelihood::create([
+            'is_karyawan_swasta' => request('is_karyawan_swasta_secondary'),
+            'is_pns' => request('is_pns_secondary'),
+            'is_wirausaha' => request('is_wirausaha_secondary'),
+            'is_penggarap_lahan' => request('is_penggarap_lahan_secondary'),
+            'is_nelayan' => request('is_nelayan_secondary'),
+        ]);
+
         $detail = CommunityProfilingDetail::create([
             'community_profiling_id' => $communityProfiling->id,
             'idm_id' => $idm->id,
@@ -229,6 +243,7 @@ class CommunityProfilingController extends Controller
             'income_id' => $income->id,
             'economic_institution_id' => $economicInstitution->id,
             'primary_livelihood_id' => $primaryLivehood->id,
+            'secondary_livelihood_id' => $secondaryLivelihood->id,
         ]);
 
         if ($detail) {
