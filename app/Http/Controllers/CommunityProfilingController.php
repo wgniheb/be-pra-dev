@@ -12,6 +12,7 @@ use App\Models\Religion;
 use App\Models\Demographic;
 use App\Models\FarmProduct;
 use Illuminate\Http\Request;
+use App\Models\RoadCondition;
 use App\Models\PlantationCrop;
 use App\Models\Transmigration;
 use App\Models\PrimaryLivehood;
@@ -136,6 +137,10 @@ class CommunityProfilingController extends Controller
             'is_manado' => 'required',
             'is_toraja' => 'required',
             'is_timor' => 'required',
+            'is_aspal' => 'required',
+            'is_cor' => 'required',
+            'is_tanah' => 'required',
+            'is_batu' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -281,6 +286,13 @@ class CommunityProfilingController extends Controller
             'is_timor' => request('is_timor'),
         ]);
 
+        $road = RoadCondition::create([
+            'is_aspal' => request('is_aspal'),
+            'is_cor' => request('is_cor'),
+            'is_tanah' => request('is_tanah'),
+            'is_batu' => request('is_batu'),
+        ]);
+
         $detail = CommunityProfilingDetail::create([
             'community_profiling_id' => $communityProfiling->id,
             'idm_id' => $idm->id,
@@ -301,6 +313,7 @@ class CommunityProfilingController extends Controller
             'transmigration_id' => $transmigration->id,
             'religion_id' => $religion->id,
             'group_id' => $group->id,
+            'road_condition_id' => $road->id,
         ]);
 
         if ($detail) {

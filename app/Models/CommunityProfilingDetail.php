@@ -10,6 +10,7 @@ use App\Models\LandUse;
 use App\Models\Religion;
 use App\Models\Demographic;
 use App\Models\FarmProduct;
+use App\Models\RoadCondition;
 use App\Models\PlantationCrop;
 use App\Models\Transmigration;
 use App\Models\EconomicFacility;
@@ -49,6 +50,7 @@ class CommunityProfilingDetail extends Model
         'transmigration_id',
         'religion_id',
         'group_id',
+        'road_condition_id',
     ];
 
     public function communityProfiling()
@@ -144,5 +146,10 @@ class CommunityProfilingDetail extends Model
     public function group()
     {
         return $this->belongsTo(Group::class);
+    }
+
+    public function roadCondition()
+    {
+        return $this->belongsTo(RoadCondition::class);
     }
 }
