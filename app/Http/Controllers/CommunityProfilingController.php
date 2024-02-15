@@ -17,7 +17,9 @@ use App\Models\Communication;
 use App\Models\RoadCondition;
 use App\Models\PlantationCrop;
 use App\Models\Transmigration;
+use App\Models\HealthyFacility;
 use App\Models\PrimaryLivehood;
+use App\Models\WorshipFacility;
 use App\Models\EconomicFacility;
 use App\Models\HealthcareWorker;
 use App\Models\LivestockProduct;
@@ -163,6 +165,19 @@ class CommunityProfilingController extends Controller
             'is_smp' => 'required',
             'is_sma' => 'required',
             'is_pt' => 'required',
+            'is_posyandu' => 'required',
+            'is_puskesmas' => 'required',
+            'is_pustu' => 'required',
+            'is_polindes' => 'required',
+            'is_klinik' => 'required',
+            'is_rs' => 'required',
+            'is_poskesdes' => 'required',
+            'is_masjid' => 'required',
+            'is_gereja_kristen' => 'required',
+            'is_gereja_katolik' => 'required',
+            'is_pura' => 'required',
+            'is_vihara' => 'required',
+            'is_balai_besarah' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -345,6 +360,25 @@ class CommunityProfilingController extends Controller
             'is_pt' => request('is_pt'),
         ]);
 
+        $healthyFacility = HealthyFacility::create([
+            'is_posyandu' => request('is_posyandu'),
+            'is_puskesmas' => request('is_puskesmas'),
+            'is_pustu' => request('is_pustu'),
+            'is_polindes' => request('is_polindes'),
+            'is_klinik' => request('is_klinik'),
+            'is_rs' => request('is_rs'),
+            'is_poskesdes' => request('is_poskesdes'),
+        ]);
+
+        $worship = WorshipFacility::create([
+            'is_masjid' => request('is_masjid'),
+            'is_gereja_kristen' => request('is_gereja_kristen'),
+            'is_gereja_katolik' => request('is_gereja_katolik'),
+            'is_pura' => request('is_pura'),
+            'is_vihara' => request('is_vihara'),
+            'is_balai_besarah' => request('is_balai_besarah'),
+        ]);
+
         $detail = CommunityProfilingDetail::create([
             'community_profiling_id' => $communityProfiling->id,
             'idm_id' => $idm->id,
@@ -370,6 +404,8 @@ class CommunityProfilingController extends Controller
             'electricity_id' => $electricity->id,
             'communication_id' => $communication->id,
             'educational_facility_id' => $educational->id,
+            'healthy_facility_id' => $healthyFacility->id,
+            'worship_facility_id' => $worship->id,
         ]);
 
         if ($detail) {

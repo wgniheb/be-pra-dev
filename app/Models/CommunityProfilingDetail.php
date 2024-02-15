@@ -15,6 +15,8 @@ use App\Models\Communication;
 use App\Models\RoadCondition;
 use App\Models\PlantationCrop;
 use App\Models\Transmigration;
+use App\Models\HealthyFacility;
+use App\Models\WorshipFacility;
 use App\Models\EconomicFacility;
 use App\Models\HealthcareWorker;
 use App\Models\LivestockProduct;
@@ -59,6 +61,8 @@ class CommunityProfilingDetail extends Model
         'electricity_id',
         'communication_id',
         'educational_facility_id',
+        'healthy_facility_id',
+        'worship_facility_id',
     ];
 
     public function communityProfiling()
@@ -179,5 +183,15 @@ class CommunityProfilingDetail extends Model
     public function educationalFacility()
     {
         return $this->belongsTo(EducationalFacility::class);
+    }
+
+    public function healthyFacility()
+    {
+        return $this->belongsTo(HealthyFacility::class);
+    }
+
+    public function worshipFacility()
+    {
+        return $this->belongsTo(WorshipFacility::class);
     }
 }
