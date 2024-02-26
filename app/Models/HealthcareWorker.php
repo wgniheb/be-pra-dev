@@ -19,6 +19,14 @@ class HealthcareWorker extends Model
         'is_dukun',
     ];
 
+    protected $casts = [
+        'is_dokter' => 'boolean',
+        'is_perawat' => 'boolean',
+        'is_mantri' => 'boolean',
+        'is_bidan' => 'boolean',
+        'is_dukun' => 'boolean',
+    ];
+
     public function communityProfilingDetails(){
         return $this->hasMany(CommunityProfilingDetail::class);
     }

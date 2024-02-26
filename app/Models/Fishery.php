@@ -16,6 +16,11 @@ class Fishery extends Model
         'is_perikanan_tangkap',
     ];
 
+    protected $casts = [
+        'is_perikanan_budidaya' => 'boolean',
+        'is_perikanan_tangkap' => 'boolean',
+    ];
+
     public function communityProfilingDetails()
     {
         return $this->hasMany(CommunityProfilingDetail::class);

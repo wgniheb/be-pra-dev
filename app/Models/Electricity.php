@@ -16,6 +16,11 @@ class Electricity extends Model
         'is_non_pln',
     ];
 
+    protected $casts = [
+        'is_pln' => 'boolean',
+        'is_non_pln' => 'boolean',
+    ];
+
     public function communityProfilingDetails()
     {
         return $this->hasMany(CommunityProfilingDetail::class);

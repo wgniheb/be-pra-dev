@@ -20,6 +20,15 @@ class WorshipFacility extends Model
         'is_balai_besarah',
     ];
 
+    protected $casts = [
+        'is_masjid' => 'boolean',
+        'is_gereja_kristen' => 'boolean',
+        'is_gereja_katolik' => 'boolean',
+        'is_pura' => 'boolean',
+        'is_vihara' => 'boolean',
+        'is_balai_besarah' => 'boolean',
+    ];
+
     public function communityProfilingDetails()
     {
         return $this->hasMany(CommunityProfilingDetail::class);

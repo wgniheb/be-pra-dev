@@ -18,6 +18,13 @@ class RoadCondition extends Model
         'is_batu',
     ];
 
+    protected $casts = [
+        'is_aspal' => 'boolean',
+        'is_cor' => 'boolean',
+        'is_tanah' => 'boolean',
+        'is_batu' => 'boolean',
+    ];
+
     public function communityProfilingDetails()
     {
         return $this->hasMany(CommunityProfilingDetail::class);

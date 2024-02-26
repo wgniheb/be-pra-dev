@@ -21,6 +21,16 @@ class MeanOfTransportation extends Model
         'is_kereta_api',
     ];
 
+    protected $casts = [
+        'is_bus' => 'boolean',
+        'is_angkot' => 'boolean',
+        'is_sepeda_motor' => 'boolean',
+        'is_mobil' => 'boolean',
+        'is_perahu' => 'boolean',
+        'is_becak' => 'boolean',
+        'is_kereta_api' => 'boolean',
+    ];
+
     public function communityProfilingDetails()
     {
         return $this->hasMany(CommunityProfilingDetail::class);

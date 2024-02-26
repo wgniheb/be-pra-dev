@@ -65,6 +65,8 @@ class CommunityProfilingDetail extends Model
         'worship_facility_id',
     ];
 
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+
     public function communityProfiling()
     {
         return $this->belongsTo(CommunityProfiling::class);

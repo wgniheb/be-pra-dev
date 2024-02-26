@@ -20,6 +20,15 @@ class PlantationCrop extends Model
         'is_lada',
     ];
 
+    protected $casts = [
+        'is_sawit' => 'boolean',
+        'is_karet' => 'boolean',
+        'is_kelapa' => 'boolean',
+        'is_kopi' => 'boolean',
+        'is_kakao' => 'boolean',
+        'is_lada' => 'boolean',
+    ];
+
     public function communityProfilingDetails(){
         return $this->hasMany(CommunityProfilingDetail::class);
     }

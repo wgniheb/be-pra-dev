@@ -19,6 +19,14 @@ class SecondaryLivelihood extends Model
         'is_nelayan',
     ];
 
+    protected $casts = [
+        'is_karyawan_swasta' => 'boolean',
+        'is_pns' => 'boolean',
+        'is_wirausaha' => 'boolean',
+        'is_penggarap_lahan' => 'boolean',
+        'is_nelayan' => 'boolean',
+    ];
+
     public function communityProfilingDetails()
     {
         return $this->hasMany(CommunityProfilingDetail::class);

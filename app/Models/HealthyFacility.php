@@ -21,6 +21,16 @@ class HealthyFacility extends Model
         'is_poskesdes',
     ];
 
+    protected $casts = [
+        'is_posyandu' => 'boolean',
+        'is_puskesmas' => 'boolean',
+        'is_pustu' => 'boolean',
+        'is_polindes' => 'boolean',
+        'is_klinik' => 'boolean',
+        'is_rs' => 'boolean',
+        'is_poskesdes' => 'boolean',
+    ];
+
     public function communityProfilingDetails()
     {
         return $this->hasMany(CommunityProfilingDetail::class);

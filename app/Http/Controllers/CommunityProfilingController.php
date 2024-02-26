@@ -415,42 +415,81 @@ class CommunityProfilingController extends Controller
         }
     }
 
-    public function show(int $communityProfiling)
-    {
-        $communityProfiling = CommunityProfiling::where('id', $communityProfiling)->with('village')->first();
-        return response()->json($communityProfiling);
+    public function show(int $communityProfiling){
+        $communityprofiling = CommunityProfiling::where('id', $communityProfiling)
+        ->with('village:id,name')
+        ->first(['id', 'year', 'village_id']);
+        return response()->json($communityprofiling);
     }
 
-    public function update(Request $request, int $communityProfiling)
+    public function getDetailProfiling(int $communityProfiling)
     {
-        $validator = Validator::make(request()->all(),[
-            'year' => 'required',
-            'village_id' => 'required|exists:villages,id',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json($validator->messages(), 202);
-        }
-
-        $communityProfiling = CommunityProfiling::where('id', $communityProfiling)->update([
-            'year' => request('year'),
-            'village_id' => request('village_id'),
-        ]);
-
-        if ($communityProfiling) {
-            return response()->json(['message' => 'Community Profiling Successfully Updated!'], 201);
-        } else {
-            return response()->json(['message' => 'Community Profiling Failed Updated!']);
-        }
+        $communityprofiling = CommunityProfilingDetail::where('community_profiling_id', $communityProfiling)
+        ->with(['idm:id,score,year,idm_status_id', 'idm.idmStatus:id,name'])
+        ->with(['demographic:id,jumlah_penduduk_laki_laki,jumlah_penduduk_perempuan,jumlah_penduduk_total,luas_desa,kepadatan_penduduk'])
+        ->with(['healthcareWorker:id,is_dokter,is_perawat,is_mantri,is_bidan,is_dukun'])
+        ->with(['farmProduct:id,is_padi,is_palawija,is_holtikultura'])
+        ->with(['plantationCrop:id,is_sawit,is_karet,is_kelapa,is_kopi,is_kakao,is_lada'])
+        ->with(['livestockProduct:id,is_unggas,is_ternak_besar,is_ternak_kecil'])
+        ->with(['fishery:id,is_perikanan_budidaya,is_perikanan_tangkap'])
+        ->with(['drinkingWaterSource:id,is_sungai,is_sumur,is_air_hujan,is_galon,is_pamsimas'])
+        ->with(['sanitationWaterSource:id,is_sungai,is_sumur,is_air_hujan,is_pamsimas'])
+        ->with(['landUse:id,luas_lahan_sawit,luas_lahan_campuran'])
+        ->with(['economicFacility:id,is_pasar,is_kios'])
+        ->with(['income:id,income'])
+        ->with(['economicInstitution:id,is_bank,is_koperasi,is_credit_union,is_brilink'])
+        ->with(['primaryLivelihood:id,is_petani,is_pekebun,is_pns,is_karyawan_swasta,is_wirausaha,is_nelayan,is_jasa'])
+        ->with(['secondaryLivelihood:id,is_karyawan_swasta,is_pns,is_wirausaha,is_penggarap_lahan,is_nelayan'])
+        ->with(['transmigration:id,is_lokal,is_transmigrasi'])
+        ->with(['religion:id,is_islam,is_kristen,is_katolik,is_hindu,is_budha,is_konghucu,is_kaharingan'])
+        ->with(['group:id,is_melayu,is_jawa,is_banjar,is_batak,is_minang,is_dayak,is_flores,is_bugis,is_papua,is_manado,is_toraja,is_timor'])
+        ->with(['roadCondition:id,is_aspal,is_cor,is_tanah,is_batu'])
+        ->with(['meanOfTransportation:id,is_bus,is_angkot,is_sepeda_motor,is_mobil,is_perahu,is_becak,is_kereta_api'])
+        ->with(['electricity:id,is_pln,is_non_pln'])
+        ->with(['communication:id,is_surat,is_telephone,is_handphone'])
+        ->with(['educationalFacility:id,is_paud,is_tk,is_sd,is_smp,is_sma,is_pt'])
+        ->with(['healthyFacility:id,is_posyandu,is_puskesmas,is_pustu,is_polindes,is_klinik,is_rs,is_poskesdes'])
+        ->with(['worshipFacility:id,is_masjid,is_gereja_kristen,is_gereja_katolik,is_pura,is_vihara,is_balai_besarah'])
+        ->first();
+        return response()->json($communityprofiling);
     }
 
-    public function destroy(int $communityProfiling)
-    {
-        $communityProfiling = CommunityProfiling::where('id', $communityProfiling)->forceDelete();
-        if ($communityProfiling) {
-            return response()->json(['message' => 'Community Profiling Successfully Deleted!'], 201);
-        } else {
-            return response()->json(['message' => 'Community Profiling Failed Deleted!']);
-        }
-    }
+    // public function show(int $communityProfiling)
+    // {
+    //     $communityProfiling = CommunityProfiling::where('id', $communityProfiling)->with('village')->first();
+    //     return response()->json($communityProfiling);
+    // }
+
+    // public function update(Request $request, int $communityProfiling)
+    // {
+    //     $validator = Validator::make(request()->all(),[
+    //         'year' => 'required',
+    //         'village_id' => 'required|exists:villages,id',
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         return response()->json($validator->messages(), 202);
+    //     }
+
+    //     $communityProfiling = CommunityProfiling::where('id', $communityProfiling)->update([
+    //         'year' => request('year'),
+    //         'village_id' => request('village_id'),
+    //     ]);
+
+    //     if ($communityProfiling) {
+    //         return response()->json(['message' => 'Community Profiling Successfully Updated!'], 201);
+    //     } else {
+    //         return response()->json(['message' => 'Community Profiling Failed Updated!']);
+    //     }
+    // }
+
+    // public function destroy(int $communityProfiling)
+    // {
+    //     $communityProfiling = CommunityProfiling::where('id', $communityProfiling)->forceDelete();
+    //     if ($communityProfiling) {
+    //         return response()->json(['message' => 'Community Profiling Successfully Deleted!'], 201);
+    //     } else {
+    //         return response()->json(['message' => 'Community Profiling Failed Deleted!']);
+    //     }
+    // }
 }

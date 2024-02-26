@@ -18,6 +18,13 @@ class EconomicInstitution extends Model
         'is_brilink',
     ];
 
+    protected $casts = [
+        'is_bank' => 'boolean',
+        'is_koperasi' => 'boolean',
+        'is_credit_union' => 'boolean',
+        'is_brilink' => 'boolean',
+    ];
+
     public function communityProfilingDetails()
     {
         return $this->hasMany(CommunityProfilingDetail::class);

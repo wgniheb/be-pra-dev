@@ -16,6 +16,11 @@ class EconomicFacility extends Model
         'is_kios',
     ];
 
+    protected $casts = [
+        'is_pasar' => 'boolean',
+        'is_kios' => 'boolean',
+    ];
+
     public function communityProfilingDetails()
     {
         return $this->hasMany(CommunityProfilingDetail::class);

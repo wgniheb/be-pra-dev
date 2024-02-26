@@ -18,6 +18,13 @@ class SanitationWaterSource extends Model
         'is_pamsimas',
     ];
 
+    protected $casts = [
+        'is_sungai' => 'boolean',
+        'is_sumur' => 'boolean',
+        'is_air_hujan' => 'boolean',
+        'is_pamsimas' => 'boolean',
+    ];
+
     public function communityProfilingDetails()
     {
         return $this->hasMany(CommunityProfilingDetail::class);

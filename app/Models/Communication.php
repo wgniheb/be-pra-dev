@@ -17,6 +17,12 @@ class Communication extends Model
         'is_handphone',
     ];
 
+    protected $casts = [
+        'is_surat' => 'boolean',
+        'is_telephone' => 'boolean',
+        'is_handphone' => 'boolean',
+    ];
+
     public function communityProfilingDetails()
     {
         return $this->hasMany(CommunityProfilingDetail::class);

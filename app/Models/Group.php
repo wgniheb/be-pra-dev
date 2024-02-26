@@ -26,6 +26,21 @@ class Group extends Model
         'is_timor',
     ];
 
+    protected $casts = [
+        'is_melayu' => 'boolean',
+        'is_jawa' => 'boolean',
+        'is_banjar' => 'boolean',
+        'is_batak' => 'boolean',
+        'is_minang' => 'boolean',
+        'is_dayak' => 'boolean',
+        'is_flores' => 'boolean',
+        'is_bugis' => 'boolean',
+        'is_papua' => 'boolean',
+        'is_manado' => 'boolean',
+        'is_toraja' => 'boolean',
+        'is_timor' => 'boolean',
+    ];
+
     public function communityProfilingDetails()
     {
         return $this->hasMany(CommunityProfilingDetail::class);

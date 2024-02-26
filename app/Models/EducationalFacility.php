@@ -20,6 +20,15 @@ class EducationalFacility extends Model
         'is_pt',
     ];
 
+    protected $casts = [
+        'is_paud' => 'boolean',
+        'is_tk' => 'boolean',
+        'is_sd' => 'boolean',
+        'is_smp' => 'boolean',
+        'is_sma' => 'boolean',
+        'is_pt' => 'boolean',
+    ];
+
     public function communityProfilingDetails()
     {
         return $this->hasMany(CommunityProfilingDetail::class);

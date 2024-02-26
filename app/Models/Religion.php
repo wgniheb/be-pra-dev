@@ -21,6 +21,16 @@ class Religion extends Model
         'is_kaharingan',
     ];
 
+    protected $casts = [
+        'is_islam' => 'boolean',
+        'is_kristen' => 'boolean',
+        'is_katolik' => 'boolean',
+        'is_hindu' => 'boolean',
+        'is_budha' => 'boolean',
+        'is_konghucu' => 'boolean',
+        'is_kaharingan' => 'boolean',
+    ];
+
     public function communityProfilingDetails()
     {
         return $this->hasMany(CommunityProfilingDetail::class);

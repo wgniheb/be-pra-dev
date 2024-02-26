@@ -16,6 +16,11 @@ class Transmigration extends Model
         'is_transmigrasi',
     ];
 
+    protected $casts = [
+        'is_lokal' => 'boolean',
+        'is_transmigrasi' => 'boolean',
+    ];
+
     public function communityProfilingDetails()
     {
         return $this->hasMany(CommunityProfilingDetail::class);

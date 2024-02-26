@@ -19,6 +19,10 @@ class Demographic extends Model
         'kepadatan_penduduk',
     ];
 
+    protected $casts = [
+        'kepadatan_penduduk' => 'integer',
+    ];
+
     public function communityProfilingDetails(){
         return $this->hasMany(CommunityProfilingDetail::class);
     }

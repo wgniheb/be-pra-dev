@@ -21,6 +21,16 @@ class PrimaryLivelihood extends Model
         'is_jasa',
     ];
 
+    protected $casts = [
+        'is_petani' => 'boolean',
+        'is_pekebun' => 'boolean',
+        'is_pns' => 'boolean',
+        'is_karyawan_swasta' => 'boolean',
+        'is_wirausaha' => 'boolean',
+        'is_nelayan' => 'boolean',
+        'is_jasa' => 'boolean',
+    ];
+
     public function communityProfilingDetails()
     {
         return $this->hasMany(CommunityProfilingDetail::class);

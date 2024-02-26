@@ -17,6 +17,12 @@ class FarmProduct extends Model
         'is_holtikultura',
     ];
 
+    protected $casts = [
+        'is_padi' => 'boolean',
+        'is_palawija' => 'boolean',
+        'is_holtikultura' => 'boolean',
+    ];
+
     public function communityProfilingDetails(){
         return $this->hasMany(CommunityProfilingDetail::class);
     }

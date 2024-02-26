@@ -16,6 +16,12 @@ class LivestockProduct extends Model
         'is_ternak_kecil',
     ];
 
+    protected $casts = [
+        'is_unggas' => 'boolean',
+        'is_ternak_besar' => 'boolean',
+        'is_ternak_kecil' => 'boolean',
+    ];
+
     public function communityProfilingDetails()
     {
         return $this->hasMany(CommunityProfilingDetail::class);
