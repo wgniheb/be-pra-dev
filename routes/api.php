@@ -162,8 +162,8 @@ Route::group(['middleware' => 'api', 'prefix' => 'community-profilings'], functi
     // Route::get('/indeks-desa-membangun/{id}', [CommunityProfilingController::class, 'getIdm']);
     Route::get('/detail/{id}', [CommunityProfilingController::class, 'getDetailprofiling']);
     // Route::get('/{id}', [CommunityProfilingController::class, 'show']);
-    // Route::post('update/{id}', [CommunityProfilingController::class, 'update']);
-    // Route::delete('/{id}', [CommunityProfilingController::class, 'destroy']);
+    Route::post('update/{id}', [CommunityProfilingController::class, 'update']);
+    Route::delete('/{id}', [CommunityProfilingController::class, 'destroy']);
     Route::get('village/{id}', [CommunityProfilingController::class, 'indexByVillage']);
 });
 
