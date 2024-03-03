@@ -11,6 +11,7 @@ use Database\Seeders\PermissionSeeder;
 use Database\Seeders\UserStatusSeeder;
 use Database\Seeders\IssueMatrixSeeder;
 use Database\Seeders\IssueCategorySeeder;
+use Database\Seeders\StakeholderKuadranSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -28,5 +29,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(StakeholderCategorySeeder::class);
         $this->call(RolePermissionSeeder::class);
+        $this->call(StakeholderKuadranSeeder::class);
     }
 }
