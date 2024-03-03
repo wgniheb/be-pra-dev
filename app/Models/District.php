@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\StakeholderHasDistrict;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,5 +26,10 @@ class District extends Model
     public function village()
     {
         return $this->hasMany(Village::class);
+    }
+
+    public function stakeholderHasDistrict()
+    {
+        return $this->hasMany(StakeholderHasDistrict::class);
     }
 }

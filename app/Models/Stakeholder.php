@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\StakeholderHasCity;
 use App\Models\StakeholderHasProvince;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,5 +22,20 @@ class Stakeholder extends Model
     public function stakeholderHasProvince()
     {
         return $this->hasMany(StakeholderHasProvince::class);
+    }
+
+    public function stakeholderHasCity()
+    {
+        return $this->hasMany(StakeholderHasCity::class);
+    }
+
+    public function stakeholderHasDistrict()
+    {
+        return $this->hasMany(StakeholderHasDistrict::class);
+    }
+
+    public function stakeholderHasVillage()
+    {
+        return $this->hasMany(StakeholderHasVillage::class);
     }
 }

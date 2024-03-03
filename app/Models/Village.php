@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\City;
 use App\Models\District;
 use App\Models\Province;
+use App\Models\StakeholderHasVillage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -33,5 +34,10 @@ class Village extends Model
     public function communityProfilings()
     {
         return $this->hasMany(CommunityProfiling::class);
+    }
+
+    public function stakeholderHasVillage()
+    {
+        return $this->hasMany(StakeholderHasVillage::class);
     }
 }
