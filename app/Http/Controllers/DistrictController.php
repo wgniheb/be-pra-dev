@@ -13,9 +13,20 @@ class DistrictController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json($district = District::with('city', 'province')->get());
+        if($request->has('city_id')){
+            $city_id = $request->input('city_id', []);
+            $district = collect();
+
+            foreach ($city_id as $id) {
+                $district = $district->merge(District::where('city_id', $id)->get());
+            }
+
+            return response()->json($district);
+        }else{
+            return response()->json($district = District::with('city', 'province')->get());
+        }
     }
 
     public function store(Request $request)

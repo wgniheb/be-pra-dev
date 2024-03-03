@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Stakeholder;
 use Illuminate\Http\Request;
+use App\Models\StakeholderHasProvince;
 use Illuminate\Support\Facades\Validator;
 
 class StakeholderController extends Controller
@@ -24,6 +25,7 @@ class StakeholderController extends Controller
             'name' => 'required',
             'phone_number' => 'required',
             'stakeholder_category_id' => 'required',
+            'stakeholder_province' => 'required|array|min:1',
         ]);
 
         if ($validator->fails()) {
@@ -36,6 +38,13 @@ class StakeholderController extends Controller
             'stakeholder_category_id' => request('stakeholder_category_id'),
         ]);
 
+        foreach (request('stakeholder_province') as $province) {
+            StakeholderHasProvince::create([
+                'stakeholder_id' => $stakeholder->id,
+                'province_id' => $province,
+            ]);
+        }
+
         if ($stakeholder) {
             return response()->json(['message' => 'Stakeholder Successfully Added!'], 201);
         } else {
@@ -43,10 +52,11 @@ class StakeholderController extends Controller
         }
     }
 
-    public function show(int $stakeholder)
+    public function show(int $params)
     {
-        $stakeholder = Stakeholder::where('id', $stakeholder)->with('stakeholderCategory')->first();
-        return response()->json($stakeholder);
+        $stakeholder = Stakeholder::where('id', $params)->with('stakeholderCategory')->first();
+        $province_area = StakeholderHasProvince::where('stakeholder_id', $params)->with('province')->get();
+        return response()->json(['stakeholder_data' => $stakeholder, 'province_area' => $province_area]);
     }
 
     public function update(Request $request, int $stakeholder)

@@ -13,9 +13,20 @@ class VillageController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json($village = Village::with('district', 'city', 'province')->get());
+        if($request->has('district_id')){
+            $district_id = $request->input('district_id', []);
+            $village = collect();
+
+            foreach ($district_id as $id) {
+                $village = $village->merge(Village::where('district_id', $id)->get());
+            }
+
+            return response()->json($village);
+        }else{
+            return response()->json($village = Village::with('district', 'city', 'province')->get());
+        }
     }
 
     public function store(Request $request)

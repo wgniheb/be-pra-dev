@@ -13,9 +13,21 @@ class CityController extends Controller
         $this->middleware('auth:api');
     }
     
-    public function index()
+    public function index(Request $request)
     {
+        if($request->has('province_id')){
+            $province_id = $request->input('province_id', []);
+            $city = collect();
+
+            foreach ($province_id as $id) {
+                $city = $city->merge(City::where('province_id', $id)->get());
+            }
+
+            return response()->json($city);
+        }else{
+        // return response()->json($request);
         return response()->json($city = City::with('province')->get());
+        }
     }
 
     public function store(Request $request)

@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\StakeholderHasProvince;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Province extends Model
 {
@@ -25,5 +26,10 @@ class Province extends Model
     public function villages()
     {
         return $this->hasMany(Village::class);
+    }
+
+    public function stakeholderHasProvince()
+    {
+        return $this->hasMany(StakeholderHasProvince::class);
     }
 }
