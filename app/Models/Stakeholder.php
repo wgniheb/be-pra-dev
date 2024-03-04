@@ -38,4 +38,9 @@ class Stakeholder extends Model
     {
         return $this->hasMany(StakeholderHasVillage::class);
     }
+
+    public function stakeholderProfiling()
+    {
+        return $this->hasMany(StakeholderProfiling::class);
+    }
 }

@@ -19,6 +19,7 @@ use App\Http\Controllers\IssueCategoryController;
 use App\Http\Controllers\RoleHasPermissionController;
 use App\Http\Controllers\CommunityProfilingController;
 use App\Http\Controllers\StakeholderCategoryController;
+use App\Http\Controllers\StakeholderProfilingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -173,4 +174,12 @@ Route::group(['middleware' => 'api', 'prefix' => 'idm-status'], function(){
     // Route::get('/{id}', [IdmStatusController::class, 'show']);
     // Route::post('update/{id}', [IdmStatusController::class, 'update']);
     // Route::delete('/{id}', [IdmStatusController::class, 'destroy']);
+});
+
+Route::group(['middleware' => 'api', 'prefix' => 'stakeholder-profilings'], function(){
+    Route::get('/', [StakeholderProfilingController::class, 'index']);
+    Route::post('/', [StakeholderProfilingController::class, 'store']);
+    // Route::get('/{id}', [StakeholderProfilingController::class, 'show']);
+    // Route::post('update/{id}', [StakeholderProfilingController::class, 'update']);
+    // Route::delete('/{id}', [StakeholderProfilingController::class, 'destroy']);
 });
