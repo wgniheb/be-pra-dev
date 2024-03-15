@@ -40,6 +40,20 @@ class IssueController extends Controller
             'published_status' => 'required',
             'period' => 'required',
             'stakeholder_perception' => 'required',
+            'evidance' => [
+                'required',
+                'array',
+                function ($attribute, $value, $fail) {
+                    if (count($value) < 2) {
+                        $fail('The ' . $attribute . ' must have at least 2 items.');
+                    }
+                    foreach ($value as $item) {
+                        if (!in_array($item->getClientOriginalExtension(), ['jpg', 'png', 'jpeg'])) {
+                            $fail('The ' . $attribute . ' must be a file of type: jpg, png, jpeg.');
+                        }
+                    }
+                },
+            ],
         ]);
 
         if ($validator->fails()) {
@@ -60,8 +74,17 @@ class IssueController extends Controller
             'issue_status_id' => $status->id,
         ]);
 
+        foreach ($request->evidance as $file) {
+            $fileName = 'evidance_'.time().uniqid().'.'.$file->extension();
+            $path = public_path('evidances/'.$fileName);
+            file_put_contents($path, $file->getContent());
+            $issue->evidances()->create([
+                'evidance' => env('STORAGE_URL').'evidances/'.$fileName,
+            ]);
+        }
+
         if ($issue) {
-            return response()->json(['message' => 'Successfully Create Issue!']);
+            return response()->json(['message' => 'Successfully Create Issue!'], 201);
         } else {
             return response()->json(['message' => 'Failed to create Issue!']);
         }

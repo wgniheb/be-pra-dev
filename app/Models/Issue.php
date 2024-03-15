@@ -6,6 +6,7 @@ use App\Models\Entity;
 use App\Models\IssueStatus;
 use App\Models\Stakeholder;
 use App\Models\IssueCategory;
+use App\Models\IssueEvidance;
 use App\Models\PublishedStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -50,5 +51,10 @@ class Issue extends Model
     public function issueStatus()
     {
         return $this->belongsTo(IssueStatus::class);
+    }
+
+    public function evidances()
+    {
+        return $this->hasMany(IssueEvidance::class);
     }
 }
