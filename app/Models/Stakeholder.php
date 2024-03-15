@@ -43,4 +43,9 @@ class Stakeholder extends Model
     {
         return $this->hasMany(StakeholderProfiling::class);
     }
+
+    public function issues()
+    {
+        return $this->hasMany(Issue::class);
+    }
 }

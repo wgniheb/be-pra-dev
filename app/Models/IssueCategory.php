@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Issue;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class IssueCategory extends Model
 {
@@ -14,4 +15,9 @@ class IssueCategory extends Model
         'name',
         'description',
     ];
+
+    public function issues()
+    {
+        return $this->hasMany(Issue::class);
+    }
 }

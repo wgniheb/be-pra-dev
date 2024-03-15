@@ -7,20 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Entity extends Model
+class IssueStatus extends Model
 {
-    use HasFactory, softDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'name',
-        'address',
-        'logo',
     ];
-
-    public function userHasEntity()
-    {
-        return $this->hasMany(UserHasEntity::class);
-    }
 
     public function issues()
     {

@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\IssueController;
 use App\Http\Controllers\EntityController;
 use App\Http\Controllers\VillageController;
 use App\Http\Controllers\DistrictController;
@@ -188,4 +189,9 @@ Route::group(['middleware' => 'api', 'prefix' => 'stakeholder-profilings'], func
 
 Route::group(['middleware' => 'api', 'prefix' => 'published-status'], function(){
     Route::get('/', [PublishedStatusController::class, 'index']);
+});
+
+Route::group(['middleware' => 'api', 'prefix' => 'issue'], function(){
+    Route::get('/', [IssueController::class, 'index']);
+    Route::post('/', [IssueController::class, 'store']);
 });
