@@ -16,6 +16,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\IssueMatrixController;
 use App\Http\Controllers\StakeholderController;
 use App\Http\Controllers\IssueCategoryController;
+use App\Http\Controllers\PublishedStatusController;
 use App\Http\Controllers\RoleHasPermissionController;
 use App\Http\Controllers\CommunityProfilingController;
 use App\Http\Controllers\StakeholderCategoryController;
@@ -179,7 +180,12 @@ Route::group(['middleware' => 'api', 'prefix' => 'idm-status'], function(){
 Route::group(['middleware' => 'api', 'prefix' => 'stakeholder-profilings'], function(){
     Route::get('/', [StakeholderProfilingController::class, 'index']);
     Route::post('/', [StakeholderProfilingController::class, 'store']);
-    // Route::get('/{id}', [StakeholderProfilingController::class, 'show']);
-    // Route::post('update/{id}', [StakeholderProfilingController::class, 'update']);
-    // Route::delete('/{id}', [StakeholderProfilingController::class, 'destroy']);
+    Route::get('/{id}', [StakeholderProfilingController::class, 'show']);
+    Route::get('profiling/{id}', [StakeholderProfilingController::class, 'getProfiling']);
+    Route::post('update/{id}', [StakeholderProfilingController::class, 'update']);
+    Route::delete('/{id}', [StakeholderProfilingController::class, 'destroy']);
+});
+
+Route::group(['middleware' => 'api', 'prefix' => 'published-status'], function(){
+    Route::get('/', [PublishedStatusController::class, 'index']);
 });

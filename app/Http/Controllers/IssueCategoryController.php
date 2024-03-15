@@ -18,7 +18,7 @@ class IssueCategoryController extends Controller
      */
     public function index()
     {
-        $category = IssueCategory::all();
+        $category = IssueCategory::all('id', 'name', 'description');
         $category = array('data' => $category);
         return response()->json($category);
     }
