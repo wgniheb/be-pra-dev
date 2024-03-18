@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Entity;
 use App\Models\IssueStatus;
 use App\Models\Stakeholder;
+use App\Models\ImpactStatus;
 use App\Models\IssueCategory;
 use App\Models\IssueEvidance;
 use App\Models\PublishedStatus;
@@ -26,6 +27,7 @@ class Issue extends Model
         'period',
         'stakeholder_perception',
         'issue_status_id',
+        'impact_status_id',
     ];
 
     public function issueCategory()
@@ -56,5 +58,10 @@ class Issue extends Model
     public function evidances()
     {
         return $this->hasMany(IssueEvidance::class);
+    }
+
+    public function impactStatus()
+    {
+        return $this->belongsTo(ImpactStatus::class);
     }
 }

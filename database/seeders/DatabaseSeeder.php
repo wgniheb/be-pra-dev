@@ -33,5 +33,6 @@ class DatabaseSeeder extends Seeder
         $this->call(StakeholderKuadranSeeder::class);
         $this->call(PublishedStatusSeeder::class);
         $this->call(IssueStatusSeeder::class);
+        $this->call(ImpactStatusSeeder::class);
     }
 }

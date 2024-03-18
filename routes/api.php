@@ -16,6 +16,7 @@ use App\Http\Controllers\IdmStatusController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\IssueMatrixController;
 use App\Http\Controllers\StakeholderController;
+use App\Http\Controllers\ImpactStatusController;
 use App\Http\Controllers\IssueCategoryController;
 use App\Http\Controllers\PublishedStatusController;
 use App\Http\Controllers\RoleHasPermissionController;
@@ -191,7 +192,14 @@ Route::group(['middleware' => 'api', 'prefix' => 'published-status'], function()
     Route::get('/', [PublishedStatusController::class, 'index']);
 });
 
+Route::group(['middleware' => 'api', 'prefix' => 'impact-status'], function(){
+    Route::get('/', [ImpactStatusController::class, 'index']);
+});
+
 Route::group(['middleware' => 'api', 'prefix' => 'issue'], function(){
     Route::get('/', [IssueController::class, 'index']);
     Route::post('/', [IssueController::class, 'store']);
+    Route::get('/{id}', [IssueController::class, 'show']);
+    Route::post('update/{id}', [IssueController::class, 'update']);
+    Route::delete('/{id}', [IssueController::class, 'destroy']);
 });
