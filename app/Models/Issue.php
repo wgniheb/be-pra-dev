@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use App\Models\Entity;
+use App\Models\RiskIssue;
 use App\Models\IssueStatus;
 use App\Models\Stakeholder;
 use App\Models\ImpactStatus;
+use App\Models\IssueAnalysis;
 use App\Models\IssueCategory;
 use App\Models\IssueEvidance;
 use App\Models\PublishedStatus;
@@ -28,6 +30,7 @@ class Issue extends Model
         'stakeholder_perception',
         'issue_status_id',
         'impact_status_id',
+        'risk_issue_id',
     ];
 
     public function issueCategory()
@@ -63,5 +66,15 @@ class Issue extends Model
     public function impactStatus()
     {
         return $this->belongsTo(ImpactStatus::class);
+    }
+
+    public function riskIssue()
+    {
+        return $this->belongsTo(RiskIssue::class);
+    }
+
+    public function issueAnalyses()
+    {
+        return $this->hasMany(IssueAnalysis::class);
     }
 }

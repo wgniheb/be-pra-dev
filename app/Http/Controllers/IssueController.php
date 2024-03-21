@@ -26,7 +26,7 @@ class IssueController extends Controller
         ->with('publishedStatus:id,name')
         ->with('issueStatus:id,name')
         ->with('impactStatus:id,name')
-        ->select(['id', 'name', 'issue_category_id', 'entity_id', 'stakeholder_id', 'published_status_id', 'period', 'issue_status_id', 'impact_status_id'])
+        ->select(['id', 'name', 'issue_category_id', 'entity_id', 'stakeholder_id', 'published_status_id', 'period', 'issue_status_id', 'impact_status_id', 'risk_issue_id'])
         ->get();
         return response()->json($issue);
     }
