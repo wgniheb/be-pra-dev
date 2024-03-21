@@ -7,12 +7,17 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\RoleSeeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\EntitySeeder;
+use Database\Seeders\RiskIssueSeeder;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\UserStatusSeeder;
 use Database\Seeders\IssueMatrixSeeder;
+use Database\Seeders\IssueStatusSeeder;
+use Database\Seeders\ImpactStatusSeeder;
 use Database\Seeders\IssueCategorySeeder;
+use Database\Seeders\RolePermissionSeeder;
 use Database\Seeders\PublishedStatusSeeder;
 use Database\Seeders\StakeholderKuadranSeeder;
+use Database\Seeders\StakeholderCategorySeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -34,5 +39,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PublishedStatusSeeder::class);
         $this->call(IssueStatusSeeder::class);
         $this->call(ImpactStatusSeeder::class);
+        $this->call(RiskIssueSeeder::class);
     }
 }
