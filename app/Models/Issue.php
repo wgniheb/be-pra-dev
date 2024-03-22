@@ -10,6 +10,7 @@ use App\Models\ImpactStatus;
 use App\Models\IssueAnalysis;
 use App\Models\IssueCategory;
 use App\Models\IssueEvidance;
+use App\Models\IssueSolution;
 use App\Models\PublishedStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -76,5 +77,10 @@ class Issue extends Model
     public function issueAnalyses()
     {
         return $this->hasMany(IssueAnalysis::class);
+    }
+
+    public function issueSolutions()
+    {
+        return $this->hasMany(IssueSolution::class);
     }
 }
