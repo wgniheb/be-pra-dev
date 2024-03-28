@@ -23,6 +23,7 @@ use App\Http\Controllers\IssueSolutionController;
 use App\Http\Controllers\PublishedStatusController;
 use App\Http\Controllers\RoleHasPermissionController;
 use App\Http\Controllers\CommunityProfilingController;
+use App\Http\Controllers\IssueImplementationController;
 use App\Http\Controllers\StakeholderCategoryController;
 use App\Http\Controllers\StakeholderProfilingController;
 
@@ -220,4 +221,12 @@ Route::group(['middleware' => 'api', 'prefix' => 'issue-solution'], function(){
     Route::get('/detail/{id}', [IssueSolutionController::class, 'show']);
     Route::post('/update/{id}', [IssueSolutionController::class, 'update']);
     Route::delete('/{id}', [IssueSolutionController::class, 'destroy']);
+});
+
+Route::group(['middleware' => 'api', 'prefix' => 'issue-implementation'], function(){
+    Route::get('/{id}', [IssueImplementationController::class, 'index']);
+    Route::post('/', [IssueImplementationController::class, 'store']);
+    Route::get('/detail/{id}', [IssueImplementationController::class, 'show']);
+    Route::post('/update/{id}', [IssueImplementationController::class, 'update']);
+    Route::delete('/{id}', [IssueImplementationController::class, 'destroy']);
 });

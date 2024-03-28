@@ -12,6 +12,7 @@ use App\Models\IssueCategory;
 use App\Models\IssueEvidance;
 use App\Models\IssueSolution;
 use App\Models\PublishedStatus;
+use App\Models\IssueImplementation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -82,5 +83,10 @@ class Issue extends Model
     public function issueSolutions()
     {
         return $this->hasMany(IssueSolution::class);
+    }
+
+    public function issueImplementations()
+    {
+        return $this->hasMany(IssueImplementation::class);
     }
 }

@@ -3,23 +3,22 @@
 namespace App\Models;
 
 use App\Models\Issue;
-use App\Models\IssueImplementation;
+use App\Models\IssueSolution;
+use App\Models\ImplementationEvidance;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class IssueSolution extends Model
+class IssueImplementation extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'issue_id',
+        'issue_solution_id',
         'name',
         'description',
-        'start_date',
-        'end_date',
-        'target',
-        'notes',
+        'date_implementation',
     ];
 
     public function issue()
@@ -27,8 +26,13 @@ class IssueSolution extends Model
         return $this->belongsTo(Issue::class);
     }
 
-    public function issueImplementations()
+    public function issueSolution()
     {
-        return $this->hasMany(IssueImplementation::class);
+        return $this->belongsTo(IssueSolution::class);
+    }
+
+    public function implementationEvidances()
+    {
+        return $this->hasMany(ImplementationEvidance::class);
     }
 }

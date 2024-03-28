@@ -15,7 +15,7 @@ class IssueSolutionController extends Controller
 
     public function index(int $id)
     {
-        $solution = IssueSolution::where('issue_id', $id)->select('id', 'name', 'start_date', 'end_date', 'target')->get();
+        $solution = IssueSolution::withCount('issueImplementations')->where('issue_id', $id)->get();
 
         return response()->json($solution);
     }
